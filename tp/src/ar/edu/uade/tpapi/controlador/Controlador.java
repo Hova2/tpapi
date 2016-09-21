@@ -17,6 +17,26 @@ public class Controlador {
 	}
 	
 	public void altaCliente(String nombre, String domicilio, String telefono, String mail){
-		this.clientes.add(new Cliente(nombre,domicilio,telefono,mail,true));
+		Cliente clienteTmp=new Cliente(nombre, domicilio, telefono, mail); 
+		if (clienteTmp.getIdCliente()!=-1)
+			this.clientes.add(clienteTmp);
+		else
+			System.out.println("Error al cargar el cliente");  
+	}
+	
+	public void listarClientes(){
+		for(int i=0; i<this.clientes.size(); i++){
+			System.out.println(this.clientes.get(i).getIdCliente());
+			System.out.println(this.clientes.get(i).getNombre());
+			System.out.println(this.clientes.get(i).getDomicilio());
+			System.out.println(this.clientes.get(i).getTelefono());
+			System.out.println(this.clientes.get(i).getMail());
+			if (this.clientes.get(i).isActivo())
+				System.out.println("Usuario activo");
+			else
+				System.out.println("Usuario no activo");
+				
+				
+		}
 	}
 }
