@@ -7,8 +7,7 @@ import ar.edu.uade.tpapi.persistencia.ClientePersistencia;
 public class PruebaId {
 	
 	public static void main(String[] args) {
-		ClientePersistencia.getInstance().getLastId();
-
+		System.out.print(ClientePersistencia.getInstance().getLastId());
 	}
 
 }

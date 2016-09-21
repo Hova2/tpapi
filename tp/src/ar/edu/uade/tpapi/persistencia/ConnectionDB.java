@@ -39,37 +39,6 @@ public class ConnectionDB {
 	    }
 	}
 	
-	public Connection connect() {
-		
-		try{
-			if (con==null){
-				con=this.createConnection();
-				return con;
-			}
-			else if (con.isClosed()){
-				con=this.createConnection();
-				return con;
-			}
-			else	
-				return con;
-		}
-		catch (SQLException e){
-			System.out.println("Mensaje Error: " + e.getMessage());
-			System.out.println("Stack Trace: " + e.getStackTrace());
-			return null;
-		}
-		
-	}
-	
-	/*public Connection connect(){
-		if (con==null){
-			con=this.createConnection();
-			return con;
-		}
-		else	
-			return con;	
-	}*/
-
 	private Connection createConnection() {
 		
 		try{
@@ -86,6 +55,24 @@ public class ConnectionDB {
 		catch (Exception ex){
 			System.out.println("Mensaje Error: " + ex.getMessage());
 			System.out.println("Stack Trace: " + ex.getStackTrace());
+			return null;
+		}		
+	}
+	
+	public Connection connect() {
+		
+		try{
+			if (con==null){
+				con=this.createConnection();
+			}
+			else if (con.isClosed()){
+				con=this.createConnection();
+			}
+			return con;	
+		}
+		catch (SQLException e){
+			System.out.println("Mensaje Error: " + e.getMessage());
+			System.out.println("Stack Trace: " + e.getStackTrace());
 			return null;
 		}
 	}

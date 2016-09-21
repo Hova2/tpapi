@@ -58,21 +58,20 @@ public class ClientePersistencia extends AdministradorPersistencia{
 		return null;
 	}
 	
-	public void getLastId(){
+	public int getLastId(){
 		try{
 			Connection con = ConnectionDB.getInstance().connect();
 			Statement s = con.createStatement();
 			ResultSet rs = s.executeQuery("select ident_current ('tpapi.dbo.Clientes')");
 			rs.next();
-			int resultado = rs.getInt(1);
+			int last = rs.getInt(1);
 			con.close();
-			System.out.print(resultado);
-			//return s.executeQuery().getInt(1);
+			return last;
 		}
 		catch (Exception e)
 		{
 			System.out.println(e);
-			//return 0;
+			return 0;
 		}
 	}
 
