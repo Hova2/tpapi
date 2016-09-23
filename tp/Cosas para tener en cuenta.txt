@@ -1,0 +1,9 @@
+1 - Rol - No tiene comportamiento. Solo adrministra pantallas porque no tiene comportamiento. 
+2 - Para la primera fase no hace falta mostrar los roles
+3 - Primera fase hasta creacion de reclamo.
+4 - En la primera fase no hace falta que el reclamo se actualize la pantalla
+5 - Los reclamos son una herencia
+6 - NO hace falta hacer los abm de usuario, se tienen que cargar los datos en la tabla directamente.
+7 - Usar los id de documento de el usuario.
+8 - Los usuarios solo tienen que tener un unico rol.
+9 - Hacer el script de sql para la entrega final.
