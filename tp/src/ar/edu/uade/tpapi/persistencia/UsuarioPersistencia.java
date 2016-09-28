@@ -4,11 +4,11 @@ import java.util.Vector;
 
 public class UsuarioPersistencia extends AdministradorPersistencia {
 
-	//@Override
-	/*public void insert(Object o) {
+	@Override
+	public void insert(Object o) {
 		// TODO Auto-generated method stub
-
-	}*/
+		
+	}
 
 	@Override
 	public void update(Object o) {
@@ -27,5 +27,4 @@ public class UsuarioPersistencia extends AdministradorPersistencia {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

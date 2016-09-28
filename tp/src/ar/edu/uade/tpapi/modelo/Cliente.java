@@ -4,26 +4,27 @@ import ar.edu.uade.tpapi.persistencia.ClientePersistencia;
 
 public class Cliente {
 
-	private long idCliente;
+	private long dniCliente;
 	private String nombre;
 	private String domicilio;
 	private String telefono;
 	private String mail;
 	private boolean activo;
 	
-	public Cliente(String nombre, String domicilio, String telefono, String mail) {
+	public Cliente(long dniCliente,String nombre, String domicilio, String telefono, String mail) {
 		super();
+		this.dniCliente=dniCliente;
 		this.nombre=nombre;
 		this.domicilio=domicilio;
 		this.telefono=telefono;
 		this.mail=mail;
 		this.activo=true;
-		this.idCliente=ClientePersistencia.getInstance().insertGetId(this);
+		ClientePersistencia.getInstance().insert(this);
 	}
 	
-	public Cliente(long idCliente, String nombre, String domicilio, String telefono, String mail, boolean activo) {
+	public Cliente(long dniCliente, String nombre, String domicilio, String telefono, String mail, boolean activo) {
 		super();
-		this.idCliente = idCliente;
+		this.dniCliente = dniCliente;
 		this.nombre = nombre;
 		this.domicilio = domicilio;
 		this.telefono = telefono;
@@ -39,8 +40,8 @@ public class Cliente {
 		this.activo = activo;
 	}
 
-	public long getIdCliente() {
-		return idCliente;
+	public long getDniCliente() {
+		return dniCliente;
 	}
 
 	public String getNombre() {
@@ -73,5 +74,9 @@ public class Cliente {
 
 	public void setMail(String mail) {
 		this.mail = mail;
+	}
+	
+	public void eliminarAfiliado(){
+		ClientePersistencia.getInstance().delete(this);
 	}
 }

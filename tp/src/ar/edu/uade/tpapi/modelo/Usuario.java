@@ -1,16 +1,11 @@
 package ar.edu.uade.tpapi.modelo;
 
-import java.util.Vector;
-
-import ar.edu.uade.tpapi.persistencia.ClientePersistencia;
-
 public class Usuario {
 
 	private long idUsuario;
 	private String nombre;
 	private String login;
 	private boolean activo;
-	private Vector<Rol> roles=new Vector<Rol>();
 	
 	public Usuario(String nombre, String login) {
 		super();
@@ -56,8 +51,5 @@ public class Usuario {
 		this.activo = activo;
 	}
 
-	public Vector<Rol> getRoles() {
-		return roles;
-	}
 	
 }

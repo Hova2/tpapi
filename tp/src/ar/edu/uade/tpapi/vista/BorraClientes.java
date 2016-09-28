@@ -2,15 +2,13 @@ package ar.edu.uade.tpapi.vista;
 
 import ar.edu.uade.tpapi.controlador.Controlador;
 
-public class Prueba {
+public class BorraClientes {
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		Controlador c = Controlador.getInstance();
-		c.altaCliente("Pepe3", "Pepe3", "Pepe3", "Pepe3");
-		c.listarClientes();
+		for (int i=1;i<=10;i++){
+			c.bajaCliente(i);
+			System.out.println(i);
+		}
 	}
-
 }

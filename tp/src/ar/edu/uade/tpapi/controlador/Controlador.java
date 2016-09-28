@@ -1,7 +1,9 @@
 package ar.edu.uade.tpapi.controlador;
 
 import java.util.Vector;
+
 import ar.edu.uade.tpapi.modelo.Cliente;
+import ar.edu.uade.tpapi.persistencia.ClientePersistencia;
 
 public class Controlador {
 
@@ -16,17 +18,20 @@ public class Controlador {
 		return (instancia!=null) ? instancia : new Controlador();
 	}
 	
-	public void altaCliente(String nombre, String domicilio, String telefono, String mail){
-		Cliente clienteTmp=new Cliente(nombre, domicilio, telefono, mail); 
-		if (clienteTmp.getIdCliente()!=-1)
-			this.clientes.add(clienteTmp);
-		else
-			System.out.println("Error al cargar el cliente");  
+	public void altaCliente(long dniCliente, String nombre, String domicilio, String telefono, String mail){
+		Cliente clienteTmp=new Cliente(dniCliente, nombre, domicilio, telefono, mail);
+		clientes.add(clienteTmp);
+	}
+	
+	public void bajaCliente(long dniCliente){
+		Cliente clienteTmp=this.buscarCliente(dniCliente);
+		if (clienteTmp!=null)
+			clienteTmp.eliminarAfiliado();
 	}
 	
 	public void listarClientes(){
 		for(int i=0; i<this.clientes.size(); i++){
-			System.out.println(this.clientes.get(i).getIdCliente());
+			System.out.println(this.clientes.get(i).getDniCliente());
 			System.out.println(this.clientes.get(i).getNombre());
 			System.out.println(this.clientes.get(i).getDomicilio());
 			System.out.println(this.clientes.get(i).getTelefono());
@@ -35,8 +40,19 @@ public class Controlador {
 				System.out.println("Usuario activo");
 			else
 				System.out.println("Usuario no activo");
-				
-				
 		}
+	}
+	
+	private Cliente buscarCliente(long dniCliente){
+		Cliente clienteTmp=null;
+		for (int i=0; i<clientes.size();i++){
+			if (clientes.get(i).getDniCliente()==dniCliente){
+				clienteTmp=clientes.get(i);
+				break;
+			}
+		}
+		if (clienteTmp==null)
+			clienteTmp=ClientePersistencia.getInstance().buscarCliente(dniCliente);
+		return clienteTmp;
 	}
 }
