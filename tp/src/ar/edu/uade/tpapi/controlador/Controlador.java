@@ -25,21 +25,26 @@ public class Controlador {
 	
 	public void bajaCliente(long dniCliente){
 		Cliente clienteTmp=this.buscarCliente(dniCliente);
-		if (clienteTmp!=null)
-			clienteTmp.eliminarAfiliado();
+		if (clienteTmp!=null){
+			clienteTmp.setActivo(false);
+			clienteTmp.eliminarCliente();
+			}
 	}
 	
 	public void listarClientes(){
-		for(int i=0; i<this.clientes.size(); i++){
-			System.out.println(this.clientes.get(i).getDniCliente());
-			System.out.println(this.clientes.get(i).getNombre());
-			System.out.println(this.clientes.get(i).getDomicilio());
-			System.out.println(this.clientes.get(i).getTelefono());
-			System.out.println(this.clientes.get(i).getMail());
-			if (this.clientes.get(i).isActivo())
-				System.out.println("Usuario activo");
-			else
-				System.out.println("Usuario no activo");
+		Vector<Cliente> clientesTmp=ClientePersistencia.getInstance().selectAll();
+		if (clientesTmp!=null){
+			for(int i=0;i<clientesTmp.size();i++){
+				System.out.println(clientesTmp.get(i).getDniCliente());
+				System.out.println(clientesTmp.get(i).getNombre());
+				System.out.println(clientesTmp.get(i).getDomicilio());
+				System.out.println(clientesTmp.get(i).getTelefono());
+				System.out.println(clientesTmp.get(i).getMail());
+				System.out.println(clientesTmp.get(i).isActivo());
+			}
+		}
+		else{
+			System.out.println("No existen clientes");
 		}
 	}
 	
@@ -51,8 +56,10 @@ public class Controlador {
 				break;
 			}
 		}
-		if (clienteTmp==null)
+		if (clienteTmp==null){
 			clienteTmp=ClientePersistencia.getInstance().buscarCliente(dniCliente);
+			clientes.add(clienteTmp);
+		}
 		return clienteTmp;
 	}
 }

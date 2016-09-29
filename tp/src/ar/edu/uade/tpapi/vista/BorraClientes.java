@@ -8,7 +8,7 @@ public class BorraClientes {
 		Controlador c = Controlador.getInstance();
 		for (int i=1;i<=10;i++){
 			c.bajaCliente(i);
-			System.out.println(i);
 		}
+		c.listarClientes();
 	}
 }

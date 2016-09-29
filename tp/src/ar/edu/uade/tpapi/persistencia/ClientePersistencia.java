@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Vector;
 
 import ar.edu.uade.tpapi.modelo.Cliente;
@@ -99,8 +100,38 @@ public class ClientePersistencia extends AdministradorPersistencia{
 		// TODO Auto-generated method stub
 		
 	}
-
+	
 	@Override
+	public void delete(Object o) {
+		Cliente cli = (Cliente)o;
+		Connection con=null;
+		PreparedStatement sta=null;
+		try{
+			con = ConnectionDB.getInstance().connect();
+			sta = con.prepareStatement("update tpapi.dbo.Clientes set activo='false' where dniCliente=?");
+			sta.setLong(1, cli.getDniCliente());
+			sta.execute();
+		}
+		catch (Exception e){
+			System.out.println(e);
+		}
+		finally{
+			try{
+				if(sta!=null)
+					sta.close();
+			}
+			catch (SQLException e){}
+			try{
+				if(con!=null)
+					con.close();
+			}
+			catch(SQLException se){
+				se.printStackTrace();
+			}
+		}
+	}
+
+	/*@Override
 	public void delete(Object o) {
 		Cliente cli = (Cliente)o;
 		Connection con=null;
@@ -129,12 +160,52 @@ public class ClientePersistencia extends AdministradorPersistencia{
 			}
 		}
 		
-	}
+	}*/
 
 	@Override
 	public Vector<Object> select(Object o) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public Vector<Cliente> selectAll(){
+		Vector<Cliente> rta = null;
+		Connection con=null;
+		Statement sta=null;
+		try{
+			con=ConnectionDB.getInstance().connect();
+			sta=con.createStatement();
+			rta=new Vector<Cliente>();
+			ResultSet res = sta.executeQuery("select * from tpapi.dbo.Clientes");
+			while (res.next()){
+				long dniCliente=res.getLong(1);
+				String nom=res.getString(2);
+				String dom=res.getString(3);
+				String tel=res.getString(4);
+				String mail=res.getString(5);
+				boolean activo=res.getBoolean(6);
+				Cliente clienteTmp = new Cliente(dniCliente, nom, dom, tel, mail, activo);
+				rta.add(clienteTmp);
+			}
+		}
+		catch (Exception e){
+			System.out.println(e);
+		}
+		finally{
+			try{
+				if(sta!=null)
+					sta.close();
+			}
+			catch (SQLException e){}
+			try{
+				if(con!=null)
+					con.close();
+			}
+			catch(SQLException se){
+				se.printStackTrace();
+			}
+		}
+		return rta;
 	}
 	
 	public Cliente buscarCliente(long dniCliente){

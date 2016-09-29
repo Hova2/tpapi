@@ -76,7 +76,11 @@ public class Cliente {
 		this.mail = mail;
 	}
 	
-	public void eliminarAfiliado(){
+	public void eliminarCliente(){
 		ClientePersistencia.getInstance().delete(this);
+	}
+	
+	public void actualizarDatos(){
+		ClientePersistencia.getInstance().update(this);
 	}
 }
