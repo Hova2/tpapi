@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import ar.edu.uade.tpapi.modelo.Cliente;
 import ar.edu.uade.tpapi.persistencia.ClientePersistencia;
+import ar.edu.uade.tpapi.vista.ClienteView;
 
 public class Controlador {
 
@@ -31,21 +32,16 @@ public class Controlador {
 			}
 	}
 	
-	public void listarClientes(){
+	public Vector<ClienteView> listarClientes(){
 		Vector<Cliente> clientesTmp=ClientePersistencia.getInstance().selectAll();
+		Vector<ClienteView> clientesViewTmp=new Vector<ClienteView>();
 		if (clientesTmp!=null){
 			for(int i=0;i<clientesTmp.size();i++){
-				System.out.println(clientesTmp.get(i).getDniCliente());
-				System.out.println(clientesTmp.get(i).getNombre());
-				System.out.println(clientesTmp.get(i).getDomicilio());
-				System.out.println(clientesTmp.get(i).getTelefono());
-				System.out.println(clientesTmp.get(i).getMail());
-				System.out.println(clientesTmp.get(i).isActivo());
+				ClienteView cliViewTmp=clientesTmp.get(i).crearViewCliente();
+				clientesViewTmp.add(cliViewTmp);
 			}
 		}
-		else{
-			System.out.println("No existen clientes");
-		}
+		return clientesViewTmp;
 	}
 	
 	private Cliente buscarCliente(long dniCliente){

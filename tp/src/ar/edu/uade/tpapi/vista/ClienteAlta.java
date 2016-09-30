@@ -134,12 +134,13 @@ public class ClienteAlta extends javax.swing.JFrame {
 				});
 			}
 			pack();
-			this.setSize(300, 235);
+			this.setSize(308, 245);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	private void limpiarPantalla(){	
+		dniCliente.setText("");
 		nombre.setText("");
 		domicilio.setText("");
 		telefono.setText("");

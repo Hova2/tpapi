@@ -1,6 +1,7 @@
 package ar.edu.uade.tpapi.modelo;
 
 import ar.edu.uade.tpapi.persistencia.ClientePersistencia;
+import ar.edu.uade.tpapi.vista.ClienteView;
 
 public class Cliente {
 
@@ -82,5 +83,10 @@ public class Cliente {
 	
 	public void actualizarDatos(){
 		ClientePersistencia.getInstance().update(this);
+	}
+	
+	public ClienteView crearViewCliente(){
+		ClienteView cliViewTmp = new ClienteView(this.dniCliente, this.nombre, this.domicilio, this.telefono, this.mail, this.activo);
+		return cliViewTmp;
 	}
 }
