@@ -7,3 +7,7 @@
 7 - Usar los id de documento de el usuario.
 8 - Los usuarios solo tienen que tener un unico rol.
 9 - Hacer el script de sql para la entrega final.
+10 - Para cargar los parts conviene hacer un sql a la base, traernos el ultimo numero con un select y cargarlo cuando se pide el proximo numero como si fuera un 
+singleton en la clase que se este trabajando
+11 - La excepciones no corta el la ejecucion del programa
+12 - El diagrama de clases y el de secuencia debe tener las clases del negocio, las vistan (No las pantallas) y los mapper de peristencia.
