@@ -97,7 +97,36 @@ public class ClientePersistencia extends AdministradorPersistencia{
 
 	@Override
 	public void update(Object o) {
-		// TODO Auto-generated method stub
+		Cliente cli = (Cliente)o;
+		Connection con=null;
+		PreparedStatement sta=null;
+		try{
+			con = ConnectionDB.getInstance().connect();
+			sta = con.prepareStatement("update tpapi.dbo.Clientes set nombre=?,domicilio=?,telefono=?,mail=? where dniCliente=?");
+			sta.setString(1,cli.getNombre());
+			sta.setString(2,cli.getDomicilio());
+			sta.setString(3,cli.getTelefono());
+			sta.setString(4,cli.getMail());
+			sta.setLong(5, cli.getDniCliente());
+			sta.execute();
+		}
+		catch (Exception e){
+			System.out.println(e);
+		}
+		finally{
+			try{
+				if(sta!=null)
+					sta.close();
+			}
+			catch (SQLException e){}
+			try{
+				if(con!=null)
+					con.close();
+			}
+			catch(SQLException se){
+				se.printStackTrace();
+			}
+		}
 		
 	}
 	
@@ -177,6 +206,46 @@ public class ClientePersistencia extends AdministradorPersistencia{
 			sta=con.createStatement();
 			rta=new Vector<Cliente>();
 			ResultSet res = sta.executeQuery("select * from tpapi.dbo.Clientes");
+			while (res.next()){
+				long dniCliente=res.getLong(1);
+				String nom=res.getString(2);
+				String dom=res.getString(3);
+				String tel=res.getString(4);
+				String mail=res.getString(5);
+				boolean activo=res.getBoolean(6);
+				Cliente clienteTmp = new Cliente(dniCliente, nom, dom, tel, mail, activo);
+				rta.add(clienteTmp);
+			}
+		}
+		catch (Exception e){
+			System.out.println(e);
+		}
+		finally{
+			try{
+				if(sta!=null)
+					sta.close();
+			}
+			catch (SQLException e){}
+			try{
+				if(con!=null)
+					con.close();
+			}
+			catch(SQLException se){
+				se.printStackTrace();
+			}
+		}
+		return rta;
+	}
+	
+	public Vector<Cliente> selectAllActivos(){
+		Vector<Cliente> rta = null;
+		Connection con=null;
+		Statement sta=null;
+		try{
+			con=ConnectionDB.getInstance().connect();
+			sta=con.createStatement();
+			rta=new Vector<Cliente>();
+			ResultSet res = sta.executeQuery("select * from tpapi.dbo.Clientes where activo='true'");
 			while (res.next()){
 				long dniCliente=res.getLong(1);
 				String nom=res.getString(2);

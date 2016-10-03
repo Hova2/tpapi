@@ -32,6 +32,22 @@ public class Controlador {
 			}
 	}
 	
+	public void modificarCliente(long dniCliente, String nombre, String domicilio, String telefono, String mail){
+		Cliente clienteTmp=this.buscarCliente(dniCliente);
+		if (clienteTmp!=null){
+			if (!clienteTmp.getNombre().equals(nombre) || 
+				!clienteTmp.getDomicilio().equals(domicilio) ||
+				!clienteTmp.getTelefono().equals(telefono) ||
+				!clienteTmp.getMail().equals(mail)){
+				clienteTmp.setNombre(nombre);
+				clienteTmp.setDomicilio(domicilio);
+				clienteTmp.setTelefono(telefono);
+				clienteTmp.setMail(mail);
+				clienteTmp.actualizarDatos();
+			}
+		}
+	}
+	
 	public Vector<ClienteView> listarClientes(){
 		Vector<Cliente> clientesTmp=ClientePersistencia.getInstance().selectAll();
 		Vector<ClienteView> clientesViewTmp=new Vector<ClienteView>();
@@ -39,6 +55,18 @@ public class Controlador {
 			for(int i=0;i<clientesTmp.size();i++){
 				ClienteView cliViewTmp=clientesTmp.get(i).crearViewCliente();
 				clientesViewTmp.add(cliViewTmp);
+			}
+		}
+		return clientesViewTmp;
+	}
+	
+	public Vector<ClienteView> listarClientesActivos(){
+		Vector<Cliente> clientesTmp=ClientePersistencia.getInstance().selectAllActivos();
+		Vector<ClienteView> clientesViewTmp=new Vector<ClienteView>();
+		if (clientesTmp!=null){
+			for(int i=0;i<clientesTmp.size();i++){
+					ClienteView cliViewTmp=clientesTmp.get(i).crearViewCliente();
+					clientesViewTmp.add(cliViewTmp);
 			}
 		}
 		return clientesViewTmp;
