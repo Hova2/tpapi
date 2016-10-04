@@ -8,7 +8,7 @@ public abstract class Reclamo {
 	private long nroReclamo;
 	private LocalDateTime fechaAlta;
 	private LocalDateTime fechaCierre;
-	private Cliente cli;
+	private Cliente cliente;
 	private String descripcion;
 	private int estado;
 	private Vector<Accion> acciones;

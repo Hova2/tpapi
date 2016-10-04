@@ -13,7 +13,6 @@ public class ClientePersistencia extends AdministradorPersistencia{
 
 	private static ClientePersistencia instancia;
 	
-	
 	private ClientePersistencia(){
 		
 	}
