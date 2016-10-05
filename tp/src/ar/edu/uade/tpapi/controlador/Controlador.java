@@ -3,6 +3,8 @@ package ar.edu.uade.tpapi.controlador;
 import java.util.Vector;
 
 import ar.edu.uade.tpapi.modelo.Cliente;
+import ar.edu.uade.tpapi.modelo.Reclamo;
+import ar.edu.uade.tpapi.modelo.ReclamoZona;
 import ar.edu.uade.tpapi.persistencia.ClientePersistencia;
 import ar.edu.uade.tpapi.vista.ClienteView;
 
@@ -10,14 +12,18 @@ public class Controlador {
 
 	private static Controlador instancia;
 	private Vector <Cliente> clientes;
+	private Vector <Reclamo> reclamos;
 	
 	private Controlador() {
 		clientes = new Vector<Cliente>();
+		reclamos = new Vector<Reclamo>();
 	}
 	
 	public static Controlador getInstance(){
 		return (instancia!=null) ? instancia : new Controlador();
 	}
+	
+	/* Metodos para la administracion de los clientes */
 	
 	public void altaCliente(long dniCliente, String nombre, String domicilio, String telefono, String mail){
 		Cliente clienteTmp=new Cliente(dniCliente, nombre, domicilio, telefono, mail);
@@ -85,5 +91,12 @@ public class Controlador {
 			clientes.add(clienteTmp);
 		}
 		return clienteTmp;
+	}
+	
+	/* Metodos para la administracion de los reclamos */
+	
+	public void altaReclamoZona(long dniCliente, String descripcion){
+		ReclamoZona reclamoZonaTmp = new ReclamoZona(dniCliente, descripcion, 1);
+		reclamos.add(reclamoZonaTmp);
 	}
 }

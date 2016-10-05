@@ -9,16 +9,16 @@ public class ReclamoProducto extends Reclamo {
 
 	private Vector<Reclamo> reclamos;
 
-	public ReclamoProducto(Cliente cliente, int estado, Vector<Reclamo> reclamos) {
-		super(cliente, "Reclamo compuesto" , estado);
+	public ReclamoProducto(long dniCliente, int estado, Vector<Reclamo> reclamos) {
+		super(dniCliente, "Reclamo compuesto" , estado);
 		this.reclamos = reclamos;
 		ReclamoProductoPersistencia.getInstance().insert(this);
 	}
 
 	public ReclamoProducto(long nroReclamo, Date fechaAlta, Date fechaCierre,
-			Cliente cliente, String descripcion, int estado,
+			long dniCliente, String descripcion, int estado,
 			Vector<Accion> acciones, Vector<Reclamo> reclamos) {
-		super(nroReclamo, fechaAlta, fechaCierre, cliente, descripcion, estado,
+		super(nroReclamo, fechaAlta, fechaCierre, dniCliente, descripcion, estado,
 				acciones);
 		this.reclamos = reclamos;
 	}

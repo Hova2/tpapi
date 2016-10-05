@@ -11,29 +11,28 @@ public abstract class Reclamo {
 	private long nroReclamo;
 	private Date fechaAlta;
 	private Date fechaCierre;
-	private Cliente cliente;
+	private long dniCliente;
 	private String descripcion;
 	private int estado;
 	private Vector<Accion> acciones;
 	
-	public Reclamo(Cliente cliente, String descripcion, int estado) {
+	public Reclamo(long dniCliente, String descripcion, int estado) {
 		super();
 		this.nroReclamo = this.buscaNroUltimoReclamo();
-		nroUltimoReclamo++;
-		this.cliente = cliente;
+		this.dniCliente = dniCliente;
 		this.descripcion = descripcion;
 		this.estado = estado;
 		this.fechaAlta = new Date();
 	}
 	
 	public Reclamo(long nroReclamo, Date fechaAlta, Date fechaCierre,
-			Cliente cliente, String descripcion, int estado,
+			long dniCliente, String descripcion, int estado,
 			Vector<Accion> acciones) {
 		super();
 		this.nroReclamo = nroReclamo;
 		this.fechaAlta = fechaAlta;
 		this.fechaCierre = fechaCierre;
-		this.cliente = cliente;
+		this.dniCliente = dniCliente;
 		this.descripcion = descripcion;
 		this.estado = estado;
 		this.acciones = acciones;
@@ -46,13 +45,13 @@ public abstract class Reclamo {
 	public void setFechaCierre(Date fechaCierre) {
 		this.fechaCierre = fechaCierre;
 	}
-
-	public Cliente getCliente() {
-		return cliente;
+		
+	public long getDniCliente() {
+		return dniCliente;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setDniCliente(long dniCliente) {
+		this.dniCliente = dniCliente;
 	}
 
 	public String getDescripcion() {
@@ -88,7 +87,10 @@ public abstract class Reclamo {
 	}
 	
 	private long buscaNroUltimoReclamo(){
-		return (nroUltimoReclamo!=0) ? nroUltimoReclamo : ReclamoPersistencia.getInstance().ultimoNumero();
+		if (nroUltimoReclamo==0){
+			nroUltimoReclamo=ReclamoPersistencia.getInstance().ultimoNumero();
+		}
+		return ++nroUltimoReclamo;
 	}
 	
 }

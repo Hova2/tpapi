@@ -7,15 +7,15 @@ import ar.edu.uade.tpapi.persistencia.ReclamoZonaPersistencia;
 
 public class ReclamoZona extends Reclamo {
 	
-	public ReclamoZona(Cliente cliente, String descripcion, int estado) {
-		super(cliente, descripcion, estado);
+	public ReclamoZona(long dniCliente, String descripcion, int estado) {
+		super(dniCliente, descripcion, estado);
 		ReclamoZonaPersistencia.getInstance().insert(this);
 	}
 
 	public ReclamoZona(long nroReclamo, Date fechaAlta, Date fechaCierre,
-			Cliente cliente, String descripcion, int estado,
+			long dniCliente, String descripcion, int estado,
 			Vector<Accion> acciones) {
-		super(nroReclamo, fechaAlta, fechaCierre, cliente, descripcion, estado,
+		super(nroReclamo, fechaAlta, fechaCierre, dniCliente, descripcion, estado,
 				acciones);
 	}
 
