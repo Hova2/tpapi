@@ -1,6 +1,6 @@
 package ar.edu.uade.tpapi.modelo;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import ar.edu.uade.tpapi.persistencia.AccionPersistencia;
 
@@ -8,19 +8,19 @@ public class Accion {
 
 	private static long nroUltimaAccion=0;
 	private long nroAccion;
-	private LocalDateTime fechaAlta;
+	private Date fechaAlta;
 	private String detalle;
 	
 	public Accion(String detalle) {
 		super();
 		this.nroAccion=this.buscaNroUltimaAccion();
 		nroUltimaAccion++;
-		this.fechaAlta=LocalDateTime.now();
+		this.fechaAlta=new Date();
 		this.detalle=detalle;
 		AccionPersistencia.getInstance().insert(this);
 	}
 	
-	public Accion(long nroAccion, LocalDateTime fechaAlta, String detalle) {
+	public Accion(long nroAccion, Date fechaAlta, String detalle) {
 		super();
 		this.nroAccion=nroAccion;
 		this.fechaAlta=fechaAlta;
@@ -39,7 +39,7 @@ public class Accion {
 		return nroAccion;
 	}
 
-	public LocalDateTime getFechaAlta() {
+	public Date getFechaAlta() {
 		return fechaAlta;
 	}
 

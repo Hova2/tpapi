@@ -28,7 +28,7 @@ public class ClientePersistencia extends AdministradorPersistencia{
 		PreparedStatement sta=null;
 		try{
 			con = ConnectionDB.getInstance().connect();
-			sta = con.prepareStatement("insert into tpapi.dbo.Clientes (dniCliente,nombre,domicilio,telefono,mail,activo) values (?,?,?,?,?,?)");
+			sta = con.prepareStatement("insert into tpapi.dbo.Cliente (dniCliente,nombre,domicilio,telefono,mail,activo) values (?,?,?,?,?,?)");
 			sta.setLong(1,cli.getDniCliente());
 			sta.setString(2,cli.getNombre());
 			sta.setString(3,cli.getDomicilio());
@@ -101,7 +101,7 @@ public class ClientePersistencia extends AdministradorPersistencia{
 		PreparedStatement sta=null;
 		try{
 			con = ConnectionDB.getInstance().connect();
-			sta = con.prepareStatement("update tpapi.dbo.Clientes set nombre=?,domicilio=?,telefono=?,mail=? where dniCliente=?");
+			sta = con.prepareStatement("update tpapi.dbo.Cliente set nombre=?,domicilio=?,telefono=?,mail=? where dniCliente=?");
 			sta.setString(1,cli.getNombre());
 			sta.setString(2,cli.getDomicilio());
 			sta.setString(3,cli.getTelefono());
@@ -136,7 +136,7 @@ public class ClientePersistencia extends AdministradorPersistencia{
 		PreparedStatement sta=null;
 		try{
 			con = ConnectionDB.getInstance().connect();
-			sta = con.prepareStatement("update tpapi.dbo.Clientes set activo='false' where dniCliente=?");
+			sta = con.prepareStatement("update tpapi.dbo.Cliente set activo='false' where dniCliente=?");
 			sta.setLong(1, cli.getDniCliente());
 			sta.execute();
 		}
@@ -204,7 +204,7 @@ public class ClientePersistencia extends AdministradorPersistencia{
 			con=ConnectionDB.getInstance().connect();
 			sta=con.createStatement();
 			rta=new Vector<Cliente>();
-			ResultSet res = sta.executeQuery("select * from tpapi.dbo.Clientes");
+			ResultSet res = sta.executeQuery("select * from tpapi.dbo.Cliente");
 			while (res.next()){
 				long dniCliente=res.getLong(1);
 				String nom=res.getString(2);
@@ -244,7 +244,7 @@ public class ClientePersistencia extends AdministradorPersistencia{
 			con=ConnectionDB.getInstance().connect();
 			sta=con.createStatement();
 			rta=new Vector<Cliente>();
-			ResultSet res = sta.executeQuery("select * from tpapi.dbo.Clientes where activo='true'");
+			ResultSet res = sta.executeQuery("select * from tpapi.dbo.Cliente where activo='true'");
 			while (res.next()){
 				long dniCliente=res.getLong(1);
 				String nom=res.getString(2);
@@ -282,7 +282,7 @@ public class ClientePersistencia extends AdministradorPersistencia{
 		PreparedStatement sta=null;
 		try{
 			con = ConnectionDB.getInstance().connect();
-			sta = con.prepareStatement("select * from tpapi.dbo.Clientes where dniCliente=?");
+			sta = con.prepareStatement("select * from tpapi.dbo.Cliente where dniCliente=?");
 			sta.setLong(1,dniCliente);
 			ResultSet res = sta.executeQuery();
 			while (res.next()){
