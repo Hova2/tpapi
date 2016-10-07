@@ -10,7 +10,10 @@ public class AccionPersistencia extends AdministradorPersistencia {
 	}
 
 	public static AccionPersistencia getInstance(){
-		return (instancia!=null) ? instancia : new AccionPersistencia();
+		if (instancia==null){
+			instancia=new AccionPersistencia();
+		}
+		return instancia;
 	}
 	
 	@Override

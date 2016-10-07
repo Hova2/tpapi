@@ -16,7 +16,10 @@ public class ReclamoZonaPersistencia extends AdministradorPersistencia {
 	}
 
 	public static ReclamoZonaPersistencia getInstance(){
-		return (instancia!=null) ? instancia : new ReclamoZonaPersistencia();
+		if (instancia==null){
+			instancia=new ReclamoZonaPersistencia();
+		}
+		return instancia;
 	}
 	
 	@Override
@@ -33,7 +36,7 @@ public class ReclamoZonaPersistencia extends AdministradorPersistencia {
 			sta.setDate(3,null);
 			sta.setString(4,reclamoZonaTmp.getDescripcion());
 			sta.setInt(5,reclamoZonaTmp.getEstado());
-			sta.setLong(6, reclamoZonaTmp.getDniCliente());
+			sta.setLong(6, reclamoZonaTmp.getCliente().getDniCliente());
 			sta.execute();
 		}
 		catch (Exception e){

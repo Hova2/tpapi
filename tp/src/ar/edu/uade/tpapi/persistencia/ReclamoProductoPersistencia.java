@@ -10,7 +10,10 @@ public class ReclamoProductoPersistencia extends AdministradorPersistencia {
 	}
 
 	public static ReclamoProductoPersistencia getInstance(){
-		return (instancia!=null) ? instancia : new ReclamoProductoPersistencia();
+		if (instancia==null){
+			instancia=new ReclamoProductoPersistencia();
+		}
+		return instancia;
 	}
 	
 	

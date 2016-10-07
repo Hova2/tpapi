@@ -18,7 +18,10 @@ public class ClientePersistencia extends AdministradorPersistencia{
 	}
 	
 	public static ClientePersistencia getInstance(){
-		return (instancia!=null) ? instancia : new ClientePersistencia();
+		if (instancia==null){
+			instancia=new ClientePersistencia();
+		}
+		return instancia;
 	}
 	
 	@Override

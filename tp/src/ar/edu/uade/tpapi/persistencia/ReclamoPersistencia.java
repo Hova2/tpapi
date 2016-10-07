@@ -4,9 +4,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Vector;
-
-import ar.edu.uade.tpapi.modelo.Cliente;
 
 public class ReclamoPersistencia {
 
@@ -16,7 +13,10 @@ public class ReclamoPersistencia {
 	}
 
 	public static ReclamoPersistencia getInstance(){
-		return (instancia!=null) ? instancia : new ReclamoPersistencia();
+		if (instancia==null){
+			instancia=new ReclamoPersistencia();
+		}
+		return instancia;
 	}
 	
 	public long ultimoNumero(){
@@ -27,8 +27,7 @@ public class ReclamoPersistencia {
 			con=ConnectionDB.getInstance().connect();
 			sta=con.createStatement();
 			ResultSet res = sta.executeQuery("select top 1 nroReclamo from tpapi.dbo.Reclamo order by nroReclamo desc");
-			res.next();
-			rta =res.getLong(1);
+			rta = res.next() ? res.getLong(1) : -1;
 		}
 		catch (Exception e){
 			System.out.println(e);

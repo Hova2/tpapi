@@ -6,6 +6,7 @@ import ar.edu.uade.tpapi.modelo.Cliente;
 import ar.edu.uade.tpapi.modelo.Reclamo;
 import ar.edu.uade.tpapi.modelo.ReclamoZona;
 import ar.edu.uade.tpapi.persistencia.ClientePersistencia;
+import ar.edu.uade.tpapi.persistencia.ReclamoPersistencia;
 import ar.edu.uade.tpapi.vista.ClienteView;
 
 public class Controlador {
@@ -20,7 +21,10 @@ public class Controlador {
 	}
 	
 	public static Controlador getInstance(){
-		return (instancia!=null) ? instancia : new Controlador();
+		if (instancia==null){
+			instancia=new Controlador();
+		}
+		return instancia;
 	}
 	
 	/* Metodos para la administracion de los clientes */
@@ -96,7 +100,8 @@ public class Controlador {
 	/* Metodos para la administracion de los reclamos */
 	
 	public void altaReclamoZona(long dniCliente, String descripcion){
-		ReclamoZona reclamoZonaTmp = new ReclamoZona(dniCliente, descripcion, 1);
+		Cliente clienteTmp = this.buscarCliente(dniCliente);
+		ReclamoZona reclamoZonaTmp = new ReclamoZona(clienteTmp, descripcion, 1);
 		reclamos.add(reclamoZonaTmp);
 	}
 }

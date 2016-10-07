@@ -10,7 +10,10 @@ private static ReclamoCantidadPersistencia instancia;
 	}
 
 	public static ReclamoCantidadPersistencia getInstance(){
-		return (instancia!=null) ? instancia : new ReclamoCantidadPersistencia();
+		if (instancia==null){
+			instancia=new ReclamoCantidadPersistencia();
+		}
+		return instancia;
 	}
 	
 	@Override

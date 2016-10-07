@@ -1,14 +1,13 @@
 package ar.edu.uade.tpapi.vista;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
 import javax.swing.WindowConstants;
 
 import ar.edu.uade.tpapi.controlador.Controlador;
-
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
@@ -44,7 +43,10 @@ public class ClienteAlta extends javax.swing.JFrame {
 	}
 	
 	public static ClienteAlta getInstance(){
-		return (instancia!=null) ? instancia : new ClienteAlta();
+		if (instancia==null){
+				instancia=new ClienteAlta();
+			}
+		return instancia;
 	}
 	
 	private void initGUI() {

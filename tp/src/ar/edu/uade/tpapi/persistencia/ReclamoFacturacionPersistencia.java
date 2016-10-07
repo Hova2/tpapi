@@ -10,7 +10,10 @@ private static ReclamoFacturacionPersistencia instancia;
 	}
 
 	public static ReclamoFacturacionPersistencia getInstance(){
-		return (instancia!=null) ? instancia : new ReclamoFacturacionPersistencia();
+		if (instancia==null){
+			instancia=new ReclamoFacturacionPersistencia();
+		}
+		return instancia;
 	}
 
 	@Override

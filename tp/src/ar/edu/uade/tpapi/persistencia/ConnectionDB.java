@@ -88,6 +88,9 @@ public class ConnectionDB {
 	}
 	
 	public static ConnectionDB getInstance(){
-		return (instancia!=null) ? instancia : new ConnectionDB();
+		if (instancia==null){
+			instancia=new ConnectionDB();
+		}
+		return instancia;
 	}
 }

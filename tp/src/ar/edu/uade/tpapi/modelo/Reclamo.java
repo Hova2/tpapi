@@ -7,32 +7,32 @@ import ar.edu.uade.tpapi.persistencia.ReclamoPersistencia;
 
 public abstract class Reclamo {
 
-	private static long nroUltimoReclamo=0;
+	private static long nroUltimoReclamo=-1;
 	private long nroReclamo;
 	private Date fechaAlta;
 	private Date fechaCierre;
-	private long dniCliente;
+	private Cliente cliente;
 	private String descripcion;
 	private int estado;
 	private Vector<Accion> acciones;
 	
-	public Reclamo(long dniCliente, String descripcion, int estado) {
+	public Reclamo(Cliente cliente, String descripcion, int estado) {
 		super();
 		this.nroReclamo = this.buscaNroUltimoReclamo();
-		this.dniCliente = dniCliente;
+		this.cliente = cliente;
 		this.descripcion = descripcion;
 		this.estado = estado;
 		this.fechaAlta = new Date();
 	}
 	
 	public Reclamo(long nroReclamo, Date fechaAlta, Date fechaCierre,
-			long dniCliente, String descripcion, int estado,
+			Cliente cliente, String descripcion, int estado,
 			Vector<Accion> acciones) {
 		super();
 		this.nroReclamo = nroReclamo;
 		this.fechaAlta = fechaAlta;
 		this.fechaCierre = fechaCierre;
-		this.dniCliente = dniCliente;
+		this.cliente = cliente;
 		this.descripcion = descripcion;
 		this.estado = estado;
 		this.acciones = acciones;
@@ -46,12 +46,12 @@ public abstract class Reclamo {
 		this.fechaCierre = fechaCierre;
 	}
 		
-	public long getDniCliente() {
-		return dniCliente;
+	public Cliente getCliente() {
+		return cliente;
 	}
 
-	public void setDniCliente(long dniCliente) {
-		this.dniCliente = dniCliente;
+	public void setDniCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 	public String getDescripcion() {
@@ -87,7 +87,7 @@ public abstract class Reclamo {
 	}
 	
 	private long buscaNroUltimoReclamo(){
-		if (nroUltimoReclamo==0){
+		if (nroUltimoReclamo==-1){
 			nroUltimoReclamo=ReclamoPersistencia.getInstance().ultimoNumero();
 		}
 		return ++nroUltimoReclamo;

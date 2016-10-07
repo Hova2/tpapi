@@ -4,6 +4,18 @@ import java.util.Vector;
 
 public class UsuarioPersistencia extends AdministradorPersistencia {
 
+	private static UsuarioPersistencia instancia;
+	
+	private UsuarioPersistencia() {
+	}
+	
+	public static UsuarioPersistencia getInstance(){
+		if (instancia==null){
+			instancia=new UsuarioPersistencia();
+		}
+		return instancia;
+	}
+
 	@Override
 	public void insert(Object o) {
 		// TODO Auto-generated method stub
