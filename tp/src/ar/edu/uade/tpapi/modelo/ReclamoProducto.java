@@ -1,25 +1,25 @@
 package ar.edu.uade.tpapi.modelo;
 
-import java.util.Date;
 import java.util.Vector;
 
-import ar.edu.uade.tpapi.persistencia.ReclamoProductoPersistencia;
+import ar.edu.uade.tpapi.persistencia.ReclamoPersistencia;
 
 public class ReclamoProducto extends Reclamo {
 
 	private Vector<Reclamo> reclamos;
 
-	public ReclamoProducto(Cliente cliente, int estado, Vector<Reclamo> reclamos) {
-		super(cliente, "Reclamo compuesto" , estado);
+	public ReclamoProducto(Vector<Reclamo> reclamos) {
+		super();
 		this.reclamos = reclamos;
-		ReclamoProductoPersistencia.getInstance().insert(this);
+		ReclamoPersistencia.getInstance().insert(this);
 	}
 
-	public ReclamoProducto(long nroReclamo, Date fechaAlta, Date fechaCierre,
-			Cliente cliente, String descripcion, int estado,
-			Vector<Accion> acciones, Vector<Reclamo> reclamos) {
-		super(nroReclamo, fechaAlta, fechaCierre, cliente, descripcion, estado,
-				acciones);
+	public ReclamoProducto(long nroReclamo, Vector<Reclamo> reclamos) {
+		super(nroReclamo);
 		this.reclamos = reclamos;
+	}
+
+	public Vector<Reclamo> getReclamos() {
+		return reclamos;
 	}
 }

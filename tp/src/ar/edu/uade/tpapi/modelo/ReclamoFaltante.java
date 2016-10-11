@@ -3,7 +3,7 @@ package ar.edu.uade.tpapi.modelo;
 import java.util.Date;
 import java.util.Vector;
 
-import ar.edu.uade.tpapi.persistencia.ReclamoFaltantePersistencia;
+import ar.edu.uade.tpapi.persistencia.ReclamoPersistencia;
 
 public class ReclamoFaltante extends Reclamo {
 
@@ -12,20 +12,64 @@ public class ReclamoFaltante extends Reclamo {
 	private Cliente cliente;
 	private String descripcion;
 	private int estado;
-	private Vector<Accion> acciones;
 	private Vector<ItemProductoReclamo> productos;
+	private Vector<Accion> acciones;
 
-	public ReclamoFaltante(Cliente cliente, String descripcion, int estado, Vector<ItemProductoReclamo> productos) {
-		super(cliente, descripcion, estado);
+	public ReclamoFaltante(String descripcion, Cliente cliente, Vector<ItemProductoReclamo> productos) {
+		super();
+		this.fechaAlta = new Date();
+		this.fechaCierre = null;
+		this.descripcion = descripcion;
+		this.estado = 1;
+		this.cliente = cliente;
 		this.productos = productos;
-		ReclamoFaltantePersistencia.getInstance().insert(this);
+		this.acciones = new Vector<Accion>();
+		ReclamoPersistencia.getInstance().insert(this);
 	}
 
 	public ReclamoFaltante(long nroReclamo, Date fechaAlta, Date fechaCierre,
 			Cliente cliente, String descripcion, int estado,
 			Vector<Accion> acciones, Vector<ItemProductoReclamo> productos) {
-		super(nroReclamo, fechaAlta, fechaCierre, cliente, descripcion, estado,
-				acciones);
+		super(nroReclamo);
+		this.fechaAlta = fechaAlta;
+		this.fechaCierre = fechaCierre;
+		this.descripcion = descripcion;
+		this.estado = estado;
+		this.cliente = cliente;
 		this.productos = productos;
+		this.acciones = acciones;
 	}
+
+	public Date getFechaCierre() {
+		return fechaCierre;
+	}
+
+	public void setFechaCierre(Date fechaCierre) {
+		this.fechaCierre = fechaCierre;
+	}
+
+	public int getEstado() {
+		return estado;
+	}
+
+	public void setEstado(int estado) {
+		this.estado = estado;
+	}
+
+	public Date getFechaAlta() {
+		return fechaAlta;
+	}
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+	public Vector<ItemProductoReclamo> getProductos() {
+		return productos;
+	}
+	
 }

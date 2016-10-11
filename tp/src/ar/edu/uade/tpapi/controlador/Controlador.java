@@ -9,6 +9,8 @@ import ar.edu.uade.tpapi.modelo.Producto;
 import ar.edu.uade.tpapi.modelo.Reclamo;
 import ar.edu.uade.tpapi.modelo.ReclamoCantidad;
 import ar.edu.uade.tpapi.modelo.ReclamoFacturacion;
+import ar.edu.uade.tpapi.modelo.ReclamoFaltante;
+import ar.edu.uade.tpapi.modelo.ReclamoProducto;
 import ar.edu.uade.tpapi.modelo.ReclamoZona;
 import ar.edu.uade.tpapi.vista.ClienteView;
 import ar.edu.uade.tpapi.vista.ItemProductoReclamoView;
@@ -155,14 +157,47 @@ public class Controlador {
 		reclamos.add(reclamoCantidadTmp);
 	}
 	
+	public void altaReclamoFaltante(long dniCliente, String descripcion, Vector<ItemProductoReclamoView> itemProdRecView){
+		ReclamoFaltante reclamoFaltanteTmp = this.altaRecFalInt(dniCliente, descripcion, itemProdRecView); 
+		reclamos.add(reclamoFaltanteTmp);
+	}
+	
+	private ReclamoFaltante altaRecFalInt(long dniCliente, String descripcion, Vector<ItemProductoReclamoView> itemProdRecView){
+		Cliente clienteTmp = this.buscarCliente(dniCliente);
+		Vector<ItemProductoReclamo> itemProdRecsTmp = new Vector<ItemProductoReclamo>();
+		for(int i=0;i<itemProdRecView.size();i++){
+			Producto productoTmp = this.buscarProducto(itemProdRecView.get(i).getProducto().getCodigo());
+			ItemProductoReclamo itemProdRecTmp = new ItemProductoReclamo(productoTmp, itemProdRecView.get(i).getCantidad());
+			itemProdRecsTmp.add(itemProdRecTmp);
+		}
+		return new ReclamoFaltante(descripcion, clienteTmp, itemProdRecsTmp);
+	}	
+	
+	
 	public void altaReclamoFacturacion(long dniCliente, String descripcion, Vector<Long> nrosFactura){
+		ReclamoFacturacion reclamoFacturacionTmp = this.altaRecFacInt(dniCliente, descripcion, nrosFactura);
+		reclamos.add(reclamoFacturacionTmp);
+	}
+	
+	private ReclamoFacturacion altaRecFacInt(long dniCliente, String descripcion, Vector<Long> nrosFactura){
 		Cliente clienteTmp = this.buscarCliente(dniCliente);
 		Vector<Factura> facturasTmp = new Vector<Factura>();
 		for(int i=0;i<nrosFactura.size();i++){
 			Factura facturaTmp = this.buscarFactura(nrosFactura.get(i));
 			facturasTmp.add(facturaTmp);
 		}
-		ReclamoFacturacion reclamoFacturacionTmp = new ReclamoFacturacion(descripcion, clienteTmp, facturasTmp);
+		return new ReclamoFacturacion(descripcion, clienteTmp, facturasTmp);
+	}
+	
+	public void altaReclamoProducto(long dniCliente, String descripcion, Vector<ItemProductoReclamoView> itemProdRecView, Vector<Long> nrosFactura){
+		Vector<Reclamo> reclamosTmp = new Vector<Reclamo>();
+		ReclamoFacturacion reclamoFacturacionTmp = this.altaRecFacInt(dniCliente, descripcion, nrosFactura);
+		ReclamoFaltante reclamoFaltanteTmp = this.altaRecFalInt(dniCliente, descripcion, itemProdRecView);
 		reclamos.add(reclamoFacturacionTmp);
+		reclamos.add(reclamoFaltanteTmp);
+		reclamosTmp.add(reclamoFacturacionTmp);
+		reclamosTmp.add(reclamoFaltanteTmp);
+		ReclamoProducto reclamoProductoTmp = new ReclamoProducto(reclamosTmp);
+		reclamos.add(reclamoProductoTmp);		
 	}
 }

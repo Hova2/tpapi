@@ -3,7 +3,6 @@ package ar.edu.uade.tpapi.modelo;
 import java.util.Date;
 import java.util.Vector;
 
-import ar.edu.uade.tpapi.persistencia.ClientePersistencia;
 import ar.edu.uade.tpapi.persistencia.FacturaPersistencia;
 
 public class Factura {

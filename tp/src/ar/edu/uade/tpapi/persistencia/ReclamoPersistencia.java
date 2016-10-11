@@ -10,6 +10,8 @@ import java.util.Vector;
 
 import ar.edu.uade.tpapi.modelo.ReclamoCantidad;
 import ar.edu.uade.tpapi.modelo.ReclamoFacturacion;
+import ar.edu.uade.tpapi.modelo.ReclamoFaltante;
+import ar.edu.uade.tpapi.modelo.ReclamoProducto;
 import ar.edu.uade.tpapi.modelo.ReclamoZona;
 
 public class ReclamoPersistencia extends AdministradorPersistencia{
@@ -86,6 +88,31 @@ public class ReclamoPersistencia extends AdministradorPersistencia{
 					PreparedStatement sta = con.prepareStatement("insert into tpapi.dbo.FacturaReclamo (nroReclamo,nroFactura) values (?,?)");
 					sta.setLong(1, reclamoFacturacionTmp.getNroReclamo());
 					sta.setLong(2, reclamoFacturacionTmp.getFacturas().get(i).getNroFactura());
+					sta.execute();
+					sta.close();
+				}
+				con.close();
+			}else if (o instanceof ReclamoFaltante){
+				ReclamoFaltante reclamoFaltanteTmp = (ReclamoFaltante)o;
+				this.insertReclamo(reclamoFaltanteTmp.getNroReclamo(), reclamoFaltanteTmp.getFechaAlta(), reclamoFaltanteTmp.getDescripcion(), 
+						reclamoFaltanteTmp.getEstado(), reclamoFaltanteTmp.getCliente().getDniCliente());
+				Connection con = ConnectionDB.getInstance().connect();
+				for(int i=0;i<reclamoFaltanteTmp.getProductos().size();i++){
+					PreparedStatement sta = con.prepareStatement("insert into tpapi.dbo.ItemProductoReclamo (nroIteProdRec,codigoProd,cantidad) values (?,?,?)");
+					sta.setLong(1, reclamoFaltanteTmp.getNroReclamo());
+					sta.setLong(2, reclamoFaltanteTmp.getProductos().get(i).getProducto().getCodigo());
+					sta.setFloat(3, reclamoFaltanteTmp.getProductos().get(i).getCantidad());
+					sta.execute();
+					sta.close();
+				}
+				con.close();
+			}else{
+				ReclamoProducto reclamoProductoTmp = (ReclamoProducto)o;
+				Connection con = ConnectionDB.getInstance().connect();
+				for(int i=0;i<reclamoProductoTmp.getReclamos().size();i++){
+					PreparedStatement sta = con.prepareStatement("insert into tpapi.dbo.ReclamoProducto (nroReclamoProducto,nroReclamo) values (?,?)");
+					sta.setLong(1, reclamoProductoTmp.getNroReclamo());
+					sta.setLong(1, reclamoProductoTmp.getReclamos().get(i).getNroReclamo());
 					sta.execute();
 					sta.close();
 				}
