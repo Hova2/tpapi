@@ -1,5 +1,7 @@
 package ar.edu.uade.tpapi.modelo;
 
+import java.util.Vector;
+
 import ar.edu.uade.tpapi.persistencia.ClientePersistencia;
 import ar.edu.uade.tpapi.vista.ClienteView;
 
@@ -77,6 +79,10 @@ public class Cliente {
 		this.mail = mail;
 	}
 	
+	public boolean soyCliente(long dniCliente){
+		return this.dniCliente == dniCliente;
+	}
+	
 	public void eliminarCliente(){
 		ClientePersistencia.getInstance().delete(this);
 	}
@@ -89,4 +95,13 @@ public class Cliente {
 		ClienteView cliViewTmp = new ClienteView(this.dniCliente, this.nombre, this.domicilio, this.telefono, this.mail, this.activo);
 		return cliViewTmp;
 	}
+	
+	public static Cliente recuperarCliente(long dniCliente){
+		return ClientePersistencia.getInstance().recuperarCliente(dniCliente);
+	}
+	
+	public static Vector<Cliente> recuperarClientes(){
+		return ClientePersistencia.getInstance().selectAll();
+	}
+	
 }

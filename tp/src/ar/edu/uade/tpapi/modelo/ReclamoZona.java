@@ -3,20 +3,64 @@ package ar.edu.uade.tpapi.modelo;
 import java.util.Date;
 import java.util.Vector;
 
-import ar.edu.uade.tpapi.persistencia.ReclamoZonaPersistencia;
+import ar.edu.uade.tpapi.persistencia.ReclamoPersistencia;
 
 public class ReclamoZona extends Reclamo {
 	
-	public ReclamoZona(Cliente cliente, String descripcion, int estado) {
-		super(cliente, descripcion, estado);
-		ReclamoZonaPersistencia.getInstance().insert(this);
+	private Date fechaAlta;
+	private Date fechaCierre;
+	private String descripcion;
+	private int estado;
+	private Cliente cliente;
+	private Vector<Accion> acciones;
+	
+	public ReclamoZona(String descripcion, Cliente cliente) {
+		super();
+		this.fechaAlta = new Date();
+		this.fechaCierre = null;
+		this.descripcion = descripcion;
+		this.estado = 1;
+		this.cliente = cliente;
+		this.acciones = new Vector<Accion>();
+		ReclamoPersistencia.getInstance().insert(this);
 	}
 
 	public ReclamoZona(long nroReclamo, Date fechaAlta, Date fechaCierre,
-			Cliente cliente, String descripcion, int estado,
-			Vector<Accion> acciones) {
-		super(nroReclamo, fechaAlta, fechaCierre, cliente, descripcion, estado,
-				acciones);
+			String descripcion, int estado, Vector<Accion> acciones, Cliente cliente) {
+		super(nroReclamo);
+		this.fechaAlta = fechaAlta;
+		this.fechaCierre = fechaCierre;
+		this.descripcion = descripcion;
+		this.estado = estado;
+		this.acciones = acciones;
+		this.cliente = cliente;
 	}
 
+	public Date getFechaCierre() {
+		return fechaCierre;
+	}
+
+	public void setFechaCierre(Date fechaCierre) {
+		this.fechaCierre = fechaCierre;
+	}
+
+	public int getEstado() {
+		return estado;
+	}
+
+	public void setEstado(int estado) {
+		this.estado = estado;
+	}
+
+	public Date getFechaAlta() {
+		return fechaAlta;
+	}
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+	
+	public Cliente getCliente(){
+		return cliente;
+	}
 }
