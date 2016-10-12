@@ -5,11 +5,13 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
+import java.util.Vector;
 
 public class ConnectionDB {
 
 	private static ConnectionDB instancia;
-	private static Connection con;
+	private Vector <Connection> connections = new Vector<Connection>();
+	protected int cantCon = 5;
 	private String jdbc;
 	private String server;
 	private String user;
@@ -17,6 +19,15 @@ public class ConnectionDB {
 	
 	private ConnectionDB(){
 		this.getConfiguration();
+		for (int i = 0; i < cantCon; i++)
+			connections.add(this.createConnection());
+	}
+	
+	public static ConnectionDB getInstance(){
+		if (instancia==null){
+			instancia=new ConnectionDB();
+		}
+		return instancia;
 	}
 	
 	private void getConfiguration() {
@@ -44,7 +55,7 @@ public class ConnectionDB {
 		try{
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			String dbConnectString = jdbc + server; 
-			con = DriverManager.getConnection (dbConnectString, user, password);
+			Connection con = DriverManager.getConnection (dbConnectString, user, password);
 			return con;
 		}
 		catch (SQLException e){
@@ -59,38 +70,29 @@ public class ConnectionDB {
 		}		
 	}
 	
-	public Connection connect() {
-		
-		try{
-			if (con==null){
-				con=this.createConnection();
-			}
-			else if (con.isClosed()){
-				con=this.createConnection();
-			}
-			return con;	
+	public Connection getConnection(){
+		Connection con = null;
+		if (connections.size() > 0)
+			con = connections.remove(0);
+		else{
+			con = this.createConnection();
 		}
-		catch (SQLException e){
-			System.out.println("Mensaje Error: " + e.getMessage());
-			System.out.println("Stack Trace: " + e.getStackTrace());
-			return null;
-		}
+		return con;
 	}
 	
-	public void closeConnection(){
+	public void realeaseConnection(Connection con){
+		connections.add(con);
+	}
+	
+	public void closeConnections(){
 		try{
-			con.close();
+			for (int i=0; i<connections.size();i++){
+				connections.get(i).close();
+			}
 		}
 		catch(Exception e){
 			System.out.println("Mensaje Error: " + e.getMessage());
 			System.out.println("Stack Trace: " + e.getStackTrace());
 		}
-	}
-	
-	public static ConnectionDB getInstance(){
-		if (instancia==null){
-			instancia=new ConnectionDB();
-		}
-		return instancia;
 	}
 }

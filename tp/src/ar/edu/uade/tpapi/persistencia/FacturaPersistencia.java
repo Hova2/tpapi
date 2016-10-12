@@ -54,7 +54,7 @@ public class FacturaPersistencia extends AdministradorPersistencia {
 		PreparedStatement sta = null;
 		Factura facturaTmp=null;
 		try{
-			con = ConnectionDB.getInstance().connect();
+			con = ConnectionDB.getInstance().getConnection();
 			sta = con.prepareStatement("select * from tpapi.dbo.Factura where nroFactura=?");
 			sta.setLong(1,nroFactura);
 			ResultSet res = sta.executeQuery();
@@ -79,9 +79,9 @@ public class FacturaPersistencia extends AdministradorPersistencia {
 		finally{
 			try{
 				if(con!=null)
-					con.close();
+					ConnectionDB.getInstance().realeaseConnection(con);
 			}
-			catch(SQLException se){
+			catch(Exception se){
 				se.printStackTrace();
 			}
 		}
@@ -93,7 +93,7 @@ public class FacturaPersistencia extends AdministradorPersistencia {
 		PreparedStatement sta = null;
 		Vector<ItemFactura> itemsFacturaTmp = null;
 		try{
-			con = ConnectionDB.getInstance().connect();
+			con = ConnectionDB.getInstance().getConnection();
 			sta = con.prepareStatement("select * from tpapi.dbo.ItemFactura where nroFactura=?");
 			sta.setLong(1,nroFactura);
 			ResultSet res = sta.executeQuery();
@@ -127,9 +127,9 @@ public class FacturaPersistencia extends AdministradorPersistencia {
 			catch (SQLException e){}
 			try{
 				if(con!=null)
-					con.close();
+					ConnectionDB.getInstance().realeaseConnection(con);
 			}
-			catch(SQLException se){
+			catch(Exception se){
 				se.printStackTrace();
 			}
 		}

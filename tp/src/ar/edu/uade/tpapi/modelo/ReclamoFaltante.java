@@ -12,6 +12,7 @@ public class ReclamoFaltante extends Reclamo {
 	private Cliente cliente;
 	private String descripcion;
 	private int estado;
+	private int tipoReclamo;
 	private Vector<ItemProductoReclamo> productos;
 	private Vector<Accion> acciones;
 
@@ -21,6 +22,7 @@ public class ReclamoFaltante extends Reclamo {
 		this.fechaCierre = null;
 		this.descripcion = descripcion;
 		this.estado = 1;
+		this.tipoReclamo = 2;
 		this.cliente = cliente;
 		this.productos = productos;
 		this.acciones = new Vector<Accion>();
@@ -28,13 +30,14 @@ public class ReclamoFaltante extends Reclamo {
 	}
 
 	public ReclamoFaltante(long nroReclamo, Date fechaAlta, Date fechaCierre,
-			Cliente cliente, String descripcion, int estado,
+			Cliente cliente, String descripcion, int estado, int tipoReclamo, 
 			Vector<Accion> acciones, Vector<ItemProductoReclamo> productos) {
 		super(nroReclamo);
 		this.fechaAlta = fechaAlta;
 		this.fechaCierre = fechaCierre;
 		this.descripcion = descripcion;
 		this.estado = estado;
+		this.tipoReclamo = tipoReclamo;
 		this.cliente = cliente;
 		this.productos = productos;
 		this.acciones = acciones;
@@ -71,5 +74,8 @@ public class ReclamoFaltante extends Reclamo {
 	public Vector<ItemProductoReclamo> getProductos() {
 		return productos;
 	}
-	
+
+	public int getTipoReclamo() {
+		return tipoReclamo;
+	}
 }

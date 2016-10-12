@@ -14,6 +14,7 @@ import ar.edu.uade.tpapi.modelo.ReclamoProducto;
 import ar.edu.uade.tpapi.modelo.ReclamoZona;
 import ar.edu.uade.tpapi.vista.ClienteView;
 import ar.edu.uade.tpapi.vista.ItemProductoReclamoView;
+import ar.edu.uade.tpapi.vista.ReclamoZonaView;
 
 public class Controlador {
 
@@ -199,5 +200,23 @@ public class Controlador {
 		reclamosTmp.add(reclamoFaltanteTmp);
 		ReclamoProducto reclamoProductoTmp = new ReclamoProducto(reclamosTmp);
 		reclamos.add(reclamoProductoTmp);		
+	}
+	
+	public Vector<ReclamoZonaView> listarReclamosZona(){
+		Vector<Reclamo> reclamosTmp = this.listarReclamos();
+		Vector<ReclamoZonaView> reclamosViewTmp = new Vector<ReclamoZonaView>();
+		for(int i = 0; i<reclamosTmp.size(); i++){
+			if(reclamosTmp.get(i).getClass().getSimpleName().equals("ReclamoZona")){
+				ReclamoZona reclamoZonaTmp = (ReclamoZona)reclamosTmp.get(i);
+				ReclamoZonaView reclamoZonaViewTmp = reclamoZonaTmp.crearReclamoZonaView();
+				reclamosViewTmp.add(reclamoZonaViewTmp);
+			}
+		}
+		return reclamosViewTmp;
+	}
+	
+	private Vector<Reclamo> listarReclamos(){
+		Vector<Reclamo> reclamosTmp = Reclamo.recuperarReclamos();
+		return reclamosTmp;
 	}
 }

@@ -1,8 +1,10 @@
 package ar.edu.uade.tpapi.modelo;
 
 import java.util.Date;
+import java.util.Vector;
 
 import ar.edu.uade.tpapi.persistencia.AccionPersistencia;
+import ar.edu.uade.tpapi.vista.AccionView;
 
 public class Accion {
 
@@ -41,6 +43,16 @@ public class Accion {
 
 	public Date getFechaAlta() {
 		return fechaAlta;
+	}
+	
+	public static Vector<Accion> recuperarAcciones(long nroReclamo){
+		Vector<Accion> accionesTmp = AccionPersistencia.getInstance().recuperarAccionesReclamo(nroReclamo);
+		return accionesTmp;
+	}
+	
+	public AccionView crearViewAccion(){
+		AccionView accionViewTmp = new AccionView(nroAccion, fechaAlta, detalle);
+		return accionViewTmp;
 	}
 
 	private long buscaNroUltimaAccion(){

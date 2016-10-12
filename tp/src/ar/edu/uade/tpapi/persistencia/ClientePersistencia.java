@@ -30,7 +30,7 @@ public class ClientePersistencia extends AdministradorPersistencia{
 		Connection con=null;
 		PreparedStatement sta=null;
 		try{
-			con = ConnectionDB.getInstance().connect();
+			con = ConnectionDB.getInstance().getConnection();
 			sta = con.prepareStatement("insert into tpapi.dbo.Cliente (dniCliente,nombre,domicilio,telefono,mail,activo) values (?,?,?,?,?,?)");
 			sta.setLong(1,cli.getDniCliente());
 			sta.setString(2,cli.getNombre());
@@ -51,9 +51,9 @@ public class ClientePersistencia extends AdministradorPersistencia{
 			catch (SQLException e){}
 			try{
 				if(con!=null)
-					con.close();
+					ConnectionDB.getInstance().realeaseConnection(con);
 			}
-			catch(SQLException se){
+			catch(Exception se){
 				se.printStackTrace();
 			}
 		}
@@ -103,7 +103,7 @@ public class ClientePersistencia extends AdministradorPersistencia{
 		Connection con=null;
 		PreparedStatement sta=null;
 		try{
-			con = ConnectionDB.getInstance().connect();
+			con = ConnectionDB.getInstance().getConnection();
 			sta = con.prepareStatement("update tpapi.dbo.Cliente set nombre=?,domicilio=?,telefono=?,mail=? where dniCliente=?");
 			sta.setString(1,cli.getNombre());
 			sta.setString(2,cli.getDomicilio());
@@ -123,9 +123,9 @@ public class ClientePersistencia extends AdministradorPersistencia{
 			catch (SQLException e){}
 			try{
 				if(con!=null)
-					con.close();
+					ConnectionDB.getInstance().realeaseConnection(con);
 			}
-			catch(SQLException se){
+			catch(Exception se){
 				se.printStackTrace();
 			}
 		}
@@ -138,7 +138,7 @@ public class ClientePersistencia extends AdministradorPersistencia{
 		Connection con=null;
 		PreparedStatement sta=null;
 		try{
-			con = ConnectionDB.getInstance().connect();
+			con = ConnectionDB.getInstance().getConnection();
 			sta = con.prepareStatement("update tpapi.dbo.Cliente set activo='false' where dniCliente=?");
 			sta.setLong(1, cli.getDniCliente());
 			sta.execute();
@@ -154,9 +154,9 @@ public class ClientePersistencia extends AdministradorPersistencia{
 			catch (SQLException e){}
 			try{
 				if(con!=null)
-					con.close();
+					ConnectionDB.getInstance().realeaseConnection(con);
 			}
-			catch(SQLException se){
+			catch(Exception se){
 				se.printStackTrace();
 			}
 		}
@@ -204,7 +204,7 @@ public class ClientePersistencia extends AdministradorPersistencia{
 		Connection con=null;
 		Statement sta=null;
 		try{
-			con=ConnectionDB.getInstance().connect();
+			con = ConnectionDB.getInstance().getConnection();
 			sta=con.createStatement();
 			rta=new Vector<Cliente>();
 			ResultSet res = sta.executeQuery("select * from tpapi.dbo.Cliente");
@@ -230,9 +230,9 @@ public class ClientePersistencia extends AdministradorPersistencia{
 			catch (SQLException e){}
 			try{
 				if(con!=null)
-					con.close();
+					ConnectionDB.getInstance().realeaseConnection(con);
 			}
-			catch(SQLException se){
+			catch(Exception se){
 				se.printStackTrace();
 			}
 		}
@@ -244,7 +244,7 @@ public class ClientePersistencia extends AdministradorPersistencia{
 		Connection con=null;
 		PreparedStatement sta=null;
 		try{
-			con = ConnectionDB.getInstance().connect();
+			con = ConnectionDB.getInstance().getConnection();
 			sta = con.prepareStatement("select * from tpapi.dbo.Cliente where dniCliente=?");
 			sta.setLong(1,dniCliente);
 			ResultSet res = sta.executeQuery();
@@ -269,9 +269,9 @@ public class ClientePersistencia extends AdministradorPersistencia{
 			catch (SQLException e){}
 			try{
 				if(con!=null)
-					con.close();
+					ConnectionDB.getInstance().realeaseConnection(con);
 			}
-			catch(SQLException se){
+			catch(Exception se){
 				se.printStackTrace();
 			}
 		}

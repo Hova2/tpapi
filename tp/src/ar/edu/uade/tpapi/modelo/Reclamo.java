@@ -1,5 +1,7 @@
 package ar.edu.uade.tpapi.modelo;
 
+import java.util.Vector;
+
 import ar.edu.uade.tpapi.persistencia.ReclamoPersistencia;
 
 public abstract class Reclamo {
@@ -25,5 +27,10 @@ public abstract class Reclamo {
 			nroUltimoReclamo=ReclamoPersistencia.getInstance().ultimoNumero();
 		}
 		return ++nroUltimoReclamo;
+	}
+	
+	public static Vector<Reclamo> recuperarReclamos(){
+		Vector<Reclamo> reclamosTmp = ReclamoPersistencia.getInstance().recuperarReclamos();
+		return reclamosTmp;
 	}
 }

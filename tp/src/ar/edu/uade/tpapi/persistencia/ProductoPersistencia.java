@@ -28,7 +28,7 @@ public class ProductoPersistencia extends AdministradorPersistencia {
 		Connection con=null;
 		PreparedStatement sta=null;
 		try{
-			con = ConnectionDB.getInstance().connect();
+			con = ConnectionDB.getInstance().getConnection();
 			sta = con.prepareStatement("insert into tpapi.dbo.Producto (codigo,titulo,descripcion,precio,activo) values (?,?,?,?,?)");
 			sta.setLong(1,prod.getCodigo());
 			sta.setString(2,prod.getTitulo());
@@ -48,9 +48,9 @@ public class ProductoPersistencia extends AdministradorPersistencia {
 			catch (SQLException e){}
 			try{
 				if(con!=null)
-					con.close();
+					ConnectionDB.getInstance().realeaseConnection(con);
 			}
-			catch(SQLException se){
+			catch(Exception se){
 				se.printStackTrace();
 			}
 		}
@@ -79,7 +79,7 @@ public class ProductoPersistencia extends AdministradorPersistencia {
 		Connection con=null;
 		PreparedStatement sta=null;
 		try{
-			con = ConnectionDB.getInstance().connect();
+			con = ConnectionDB.getInstance().getConnection();
 			sta = con.prepareStatement("select * from tpapi.dbo.Producto where codigo=?");
 			sta.setLong(1,codigo);
 			ResultSet res = sta.executeQuery();
@@ -103,9 +103,9 @@ public class ProductoPersistencia extends AdministradorPersistencia {
 			catch (SQLException e){}
 			try{
 				if(con!=null)
-					con.close();
+					ConnectionDB.getInstance().realeaseConnection(con);
 			}
-			catch(SQLException se){
+			catch(Exception se){
 				se.printStackTrace();
 			}
 		}

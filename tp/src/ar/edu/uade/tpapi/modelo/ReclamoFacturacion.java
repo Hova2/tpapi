@@ -11,6 +11,7 @@ public class ReclamoFacturacion extends Reclamo {
 	private Date fechaCierre;
 	private String descripcion;
 	private int estado;
+	private int tipoReclamo;
 	private Cliente cliente;
 	private Vector<Factura> facturas;
 	private Vector<Accion> acciones;
@@ -21,6 +22,7 @@ public class ReclamoFacturacion extends Reclamo {
 		this.fechaCierre = null;
 		this.descripcion = descripcion;
 		this.estado = 1;
+		this.tipoReclamo = 3;
 		this.cliente = cliente;
 		this.facturas = facturas;
 		this.acciones = new Vector<Accion>();
@@ -28,13 +30,14 @@ public class ReclamoFacturacion extends Reclamo {
 	}
 
 	public ReclamoFacturacion(long nroReclamo, Date fechaAlta,
-			Date fechaCierre, Cliente cliente, String descripcion, int estado,
+			Date fechaCierre, Cliente cliente, String descripcion, int estado, int tipoReclamo,
 			Vector<Accion> acciones, Vector<Factura> facturas) {
 		super(nroReclamo);
 		this.fechaAlta = fechaAlta;
 		this.fechaCierre = fechaCierre;
 		this.descripcion = descripcion;
 		this.estado = estado;
+		this.tipoReclamo = tipoReclamo;
 		this.cliente = cliente;
 		this.facturas = facturas;
 		this.acciones = acciones;
@@ -70,5 +73,9 @@ public class ReclamoFacturacion extends Reclamo {
 
 	public Vector<Factura> getFacturas() {
 		return facturas;
+	}
+	
+	public int getTipoReclamo() {
+		return tipoReclamo;
 	}
 }
