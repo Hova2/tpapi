@@ -25,18 +25,8 @@ public class PantallaCallCenter extends javax.swing.JFrame{
 	private JMenuBar jMenuBar1;
 	private JMenu jMenu1;
 	private JMenuItem jMenuItem1;
-
-	public static void main(String[] args) {
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				PantallaCallCenter inst = new PantallaCallCenter();
-				inst.setLocationRelativeTo(null);
-				inst.setVisible(true);
-			}
-		});
-	}
 	
-	private PantallaCallCenter() {
+	public PantallaCallCenter() {
 		super();
 		initGUI();
 	}

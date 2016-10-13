@@ -21,16 +21,25 @@ public abstract class Reclamo {
 	public long getNroReclamo() {
 		return nroReclamo;
 	}
-
-	private long buscaNroUltimoReclamo(){
-		if (nroUltimoReclamo==-1){
-			nroUltimoReclamo=ReclamoPersistencia.getInstance().ultimoNumero();
-		}
-		return ++nroUltimoReclamo;
+	
+	public boolean soyReclamo(long nroReclamo){
+		return this.nroReclamo == nroReclamo;
+	}
+	
+	public static Reclamo recuperarReclamo(long nroReclamo){
+		Reclamo reclamoTmp = ReclamoPersistencia.getInstance().recuperarReclamo(nroReclamo);
+		return reclamoTmp;
 	}
 	
 	public static Vector<Reclamo> recuperarReclamos(){
 		Vector<Reclamo> reclamosTmp = ReclamoPersistencia.getInstance().recuperarReclamos();
 		return reclamosTmp;
+	}
+	
+	private long buscaNroUltimoReclamo(){
+		if (nroUltimoReclamo==-1){
+			nroUltimoReclamo=ReclamoPersistencia.getInstance().ultimoNumero();
+		}
+		return ++nroUltimoReclamo;
 	}
 }

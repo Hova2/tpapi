@@ -74,40 +74,40 @@ public class PantallaPrueba extends javax.swing.JFrame {
 					lNroReclamo = new JLabel();
 					reclamo.add(lNroReclamo);
 					lNroReclamo.setText("NroReclamo:");
-					lNroReclamo.setBounds(99, 33, 75, 17);
+					lNroReclamo.setBounds(278, 33, 75, 17);
 					lNroReclamo.setFont(new java.awt.Font("Tahoma",1,11));
 				}
 				{
 					nroReclamo = new JLabel();
 					reclamo.add(nroReclamo);
-					nroReclamo.setBounds(180, 33, 61, 16);
+					nroReclamo.setBounds(365, 33, 61, 16);
 					nroReclamo.setText("nroReclamo");
 				}
 				{
 					lFechaAlta = new JLabel();
 					reclamo.add(lFechaAlta);
 					lFechaAlta.setText("Fecha de alta:");
-					lFechaAlta.setBounds(369, 36, 86, 14);
+					lFechaAlta.setBounds(13, 34, 86, 14);
 					lFechaAlta.setFont(new java.awt.Font("Tahoma",1,11));
 				}
 				{
 					fechaAlta = new JLabel();
 					reclamo.add(fechaAlta);
 					fechaAlta.setText("fechaAlta");
-					fechaAlta.setBounds(455, 36, 75, 14);
+					fechaAlta.setBounds(99, 34, 75, 14);
 				}
 				{
 					lNombreCliente = new JLabel();
 					reclamo.add(lNombreCliente);
 					lNombreCliente.setText("Cliente:");
-					lNombreCliente.setBounds(99, 79, 48, 14);
+					lNombreCliente.setBounds(13, 79, 48, 14);
 					lNombreCliente.setFont(new java.awt.Font("Tahoma",1,11));
 				}
 				{
 					nombreCliente = new JLabel();
 					reclamo.add(nombreCliente);
 					nombreCliente.setText("nombreCLiente");
-					nombreCliente.setBounds(153, 79, 72, 14);
+					nombreCliente.setBounds(67, 79, 72, 14);
 				}
 				{
 					lDniCLiente = new JLabel();

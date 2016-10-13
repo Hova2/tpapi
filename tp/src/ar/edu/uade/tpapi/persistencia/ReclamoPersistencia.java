@@ -145,6 +145,109 @@ public class ReclamoPersistencia extends AdministradorPersistencia{
 		return null;
 	}
 	
+	public void insertarAccion(Accion accion, long nroReclamo){
+		Connection con = null;
+		PreparedStatement sta = null;
+		try{
+			con = ConnectionDB.getInstance().getConnection();
+			sta = con.prepareStatement("insert into tpapi.dbo.Accion (fechaAlta,detalle,nroReclamo) values (?,?,?)");
+			java.sql.Date fechaAltaTmp = new java.sql.Date(accion.getFechaAlta().getTime());
+			sta.setDate(1,fechaAltaTmp);
+			sta.setString(2,accion.getDetalle());
+			sta.setLong(3,nroReclamo);
+			sta.execute();
+		}
+		catch (Exception e){
+			System.out.println(e);
+		}
+		finally{
+			try{
+				if(sta!=null)
+					sta.close();
+			}
+			catch (SQLException e){}
+			try{
+				if(con!=null)
+					ConnectionDB.getInstance().realeaseConnection(con);
+			}
+			catch(Exception se){
+				se.printStackTrace();
+			}
+		}
+	}
+	
+	public void cambiarEstado(int estado, long nroReclamo){
+		Connection con = null;
+		PreparedStatement sta = null;
+		try{
+			con = ConnectionDB.getInstance().getConnection();
+			sta = con.prepareStatement("update tpapi.dbo.Reclamo set estado=? where nroReclamo=?");
+			sta.setInt(1, estado);
+			sta.setLong(2, nroReclamo);
+			sta.execute();
+		}
+		catch (Exception e){
+			System.out.println(e);
+		}
+		finally{
+			try{
+				if(sta!=null)
+					sta.close();
+			}
+			catch (SQLException e){}
+			try{
+				if(con!=null)
+					ConnectionDB.getInstance().realeaseConnection(con);
+			}
+			catch(Exception se){
+				se.printStackTrace();
+			}
+		}
+	}
+			
+	public Reclamo recuperarReclamo(long nroReclamo){
+		Reclamo reclamoTmp = null;
+		Connection con = null;
+		PreparedStatement sta = null;
+		try{
+			con = ConnectionDB.getInstance().getConnection();
+			sta = con.prepareStatement("select * from tpapi.dbo.Reclamo where nroReclamo=?");
+			sta.setLong(1,nroReclamo);
+			ResultSet res = sta.executeQuery();
+			while (res.next()){
+				if(res.getInt(7) == 0){
+					java.util.Date fechaAltaTmp = new java.util.Date(res.getDate(2).getTime());
+					java.util.Date fechaCierreTmp = null;
+					if(res.getDate(3) != null){
+						fechaCierreTmp = new java.util.Date(res.getDate(3).getTime());
+					}
+					Cliente clienteTmp = Cliente.recuperarCliente(res.getLong(6));
+					Vector<Accion> accionesTmp = this.recuperarAccionesReclamo(res.getLong(1));
+					reclamoTmp = new ReclamoZona(res.getLong(1), fechaAltaTmp, fechaCierreTmp, res.getString(4), res.getInt(5), 
+							res.getInt(7), accionesTmp, clienteTmp);
+				} 
+			}
+		}
+		catch (Exception e){
+			System.out.println(e);
+		}
+		finally{
+			try{
+				if(sta!=null)
+					sta.close();
+			}
+			catch (SQLException e){}
+			try{
+				if(con!=null)
+					ConnectionDB.getInstance().realeaseConnection(con);
+			}
+			catch(Exception se){
+				se.printStackTrace();
+			}
+		}
+		return reclamoTmp;
+	}
+	
 	public Vector<Reclamo> recuperarReclamos(){
 		Connection con = null;
 		Statement sta = null;
@@ -161,7 +264,7 @@ public class ReclamoPersistencia extends AdministradorPersistencia{
 						fechaCierreTmp = new java.util.Date(res.getDate(3).getTime());
 					}
 					Cliente clienteTmp = Cliente.recuperarCliente(res.getLong(6));
-					Vector<Accion> accionesTmp = Accion.recuperarAcciones(res.getLong(1));
+					Vector<Accion> accionesTmp = this.recuperarAccionesReclamo(res.getLong(1));
 					ReclamoZona reclamoZonaTmp = new ReclamoZona(res.getLong(1), fechaAltaTmp, fechaCierreTmp, res.getString(4), res.getInt(5), 
 							res.getInt(7), accionesTmp, clienteTmp);
 					reclamosTmp.add(reclamoZonaTmp);
@@ -221,5 +324,41 @@ public class ReclamoPersistencia extends AdministradorPersistencia{
 				se.printStackTrace();
 			}
 		}
+	}
+	
+	private Vector<Accion> recuperarAccionesReclamo(long nroReclamo){
+		Connection con = null;
+		PreparedStatement sta = null;
+		Vector<Accion> accionesTmp = new Vector<Accion>();
+		try{
+			con = ConnectionDB.getInstance().getConnection();
+			sta = con.prepareStatement("select * from tpapi.dbo.Accion where nroReclamo=?");
+			sta.setLong(1, nroReclamo);
+			ResultSet res = sta.executeQuery();
+			while(res.next()){
+				java.util.Date fechaAltaTmp = new java.util.Date(res.getDate(1).getTime());
+				Accion accionTmp = new Accion(fechaAltaTmp, res.getString(2));
+				accionesTmp.add(accionTmp);
+					
+			} 
+		}
+		catch (Exception e){
+			System.out.println(e);
+		}
+		finally{
+			try{
+				if(sta!=null)
+					sta.close();
+			}
+			catch (SQLException e){}
+			try{
+				if(con!=null)
+					ConnectionDB.getInstance().realeaseConnection(con);
+			}
+			catch(Exception se){
+				se.printStackTrace();
+			}
+		}
+		return accionesTmp;
 	}
 }

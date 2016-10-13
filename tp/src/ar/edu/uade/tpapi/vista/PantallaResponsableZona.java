@@ -22,6 +22,8 @@ import ar.edu.uade.tpapi.controlador.Controlador;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
@@ -41,7 +43,6 @@ public class PantallaResponsableZona extends javax.swing.JFrame {
 	* Auto-generated main method to display this JFrame
 	*/
 	
-	private JPanel reclamo;
 	private JLabel nroReclamo;
 	private JLabel lNombreCliente;
 	private JTextArea descripcion;
@@ -64,8 +65,8 @@ public class PantallaResponsableZona extends javax.swing.JFrame {
 	private JMenuBar jMenuBar1;
 	private JPanel panel;
 	private JPanel[] reclamos;
-	SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-YYYY");
-	private Vector<ReclamoZonaView> reclamosZonaViewTmp;
+	private SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-YYYY");
+	private Vector<ReclamoZonaView> reclamosZonaView;
 
 	public PantallaResponsableZona() {
 		super();
@@ -84,8 +85,8 @@ public class PantallaResponsableZona extends javax.swing.JFrame {
 			this.setPreferredSize(new java.awt.Dimension(640, 938));
 			getContentPane().add(getJScrollPane1(), BorderLayout.CENTER);
 			{
-				reclamosZonaViewTmp = Controlador.getInstance().listarReclamosZona();
-				int size = reclamosZonaViewTmp.size();
+				reclamosZonaView = Controlador.getInstance().listarReclamosZona();
+				int size = reclamosZonaView.size();
 				
 				jMenuBar1 = new JMenuBar();
 				setJMenuBar(jMenuBar1);
@@ -114,7 +115,7 @@ public class PantallaResponsableZona extends javax.swing.JFrame {
 						nroReclamo = new JLabel();
 						reclamos[i].add(nroReclamo);
 						nroReclamo.setBounds(180, 33, 61, 16);
-						nroReclamo.setText(Long.toString(reclamosZonaViewTmp.get(i).getNroReclamo()));
+						nroReclamo.setText(Long.toString(reclamosZonaView.get(i).getNroReclamo()));
 					}
 					{
 						lFechaAlta = new JLabel();
@@ -127,7 +128,7 @@ public class PantallaResponsableZona extends javax.swing.JFrame {
 						fechaAlta = new JLabel();
 						reclamos[i].add(fechaAlta);
 						fechaAlta.setBounds(455, 36, 75, 14);
-						fechaAlta.setText(formatoFecha.format(reclamosZonaViewTmp.get(i).getFechaAlta()));
+						fechaAlta.setText(formatoFecha.format(reclamosZonaView.get(i).getFechaAlta()));
 					}
 					{
 						lNombreCliente = new JLabel();
@@ -140,7 +141,7 @@ public class PantallaResponsableZona extends javax.swing.JFrame {
 						nombreCliente = new JLabel();
 						reclamos[i].add(nombreCliente);
 						nombreCliente.setBounds(153, 79, 72, 14);
-						nombreCliente.setText(reclamosZonaViewTmp.get(i).getCliente().getNombre());
+						nombreCliente.setText(reclamosZonaView.get(i).getCliente().getNombre());
 					}
 					{
 						lDniCLiente = new JLabel();
@@ -153,7 +154,7 @@ public class PantallaResponsableZona extends javax.swing.JFrame {
 						dniCliente = new JLabel();
 						reclamos[i].add(dniCliente);
 						dniCliente.setBounds(463, 79, 47, 14);
-						dniCliente.setText(Long.toString(reclamosZonaViewTmp.get(i).getCliente().getDniCliente()));
+						dniCliente.setText(Long.toString(reclamosZonaView.get(i).getCliente().getDniCliente()));
 					}
 					{
 						lEstado = new JLabel();
@@ -166,12 +167,14 @@ public class PantallaResponsableZona extends javax.swing.JFrame {
 						estado = new JLabel();
 						reclamos[i].add(estado);
 						estado.setBounds(400, 121, 195, 14);
-						if(reclamosZonaViewTmp.get(i).getEstado() == 1){
+						if(reclamosZonaView.get(i).getEstado() == 1){
 							estado.setText("Ingresado");
-						}else if(reclamosZonaViewTmp.get(i).getEstado() == 2){
+						}else if(reclamosZonaView.get(i).getEstado() == 2){
 							estado.setText("En tratamiento");
+						}else if(reclamosZonaView.get(i).getEstado() == 3){
+							estado.setText("Cerrado");
 						}else{
-							estado.setText("Salucionado");
+							estado.setText("Solucionado");
 						}
 					}
 					{
@@ -189,7 +192,7 @@ public class PantallaResponsableZona extends javax.swing.JFrame {
 						descripcion.setBorder(new LineBorder(new java.awt.Color(0,0,0), 1, false));
 						descripcion.setWrapStyleWord(true);
 						descripcion.setLineWrap(true);
-						descripcion.setText(reclamosZonaViewTmp.get(i).getDescripcion());
+						descripcion.setText(reclamosZonaView.get(i).getDescripcion());
 					}
 					panel.add(reclamos[i]);
 				}
@@ -216,6 +219,11 @@ public class PantallaResponsableZona extends javax.swing.JFrame {
 		if(altaAccion == null) {
 			altaAccion = new JMenuItem();
 			altaAccion.setText("Agregar accion");
+			altaAccion.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent evt) {
+					PantallaAltaAccion.getInstance().setVisible(true);
+				}
+			});
 		}
 		return altaAccion;
 	}
@@ -223,7 +231,13 @@ public class PantallaResponsableZona extends javax.swing.JFrame {
 	private JMenuItem getVerAcciones() {
 		if(verAcciones == null) {
 			verAcciones = new JMenuItem();
-			verAcciones.setText("Ver acciones");
+			verAcciones.setText("Buscar acciones");
+			verAcciones.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent evt) {
+					PantallaBuscarAccionReclamo pBAR = new PantallaBuscarAccionReclamo(reclamosZonaView);
+					pBAR.setVisible(true);
+				}
+			});
 		}
 		return verAcciones;
 	}
@@ -241,6 +255,11 @@ public class PantallaResponsableZona extends javax.swing.JFrame {
 		if(cambiarEstado == null) {
 			cambiarEstado = new JMenuItem();
 			cambiarEstado.setText("Cambiar estado");
+			cambiarEstado.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent evt) {
+					PantallaCambioEstado.getInstance().setVisible(true);
+				}
+			});
 		}
 		return cambiarEstado;
 	}

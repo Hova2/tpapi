@@ -1,26 +1,21 @@
 package ar.edu.uade.tpapi.modelo;
 
+import ar.edu.uade.tpapi.persistencia.UsuarioPersistencia;
+import ar.edu.uade.tpapi.vista.UsuarioView;
+
 public class Usuario {
 
 	private long idUsuario;
 	private String nombre;
-	private String login;
-	private boolean activo;
-	
-	public Usuario(String nombre, String login) {
-		super();
-		//this.idUsuario = UsuarioPersistencia.getInstance().insert(this);
-		this.nombre = nombre;
-		this.login = login;
-		this.activo=true;
-	}
+	private String password;
+	private int rol;
 		
-	public Usuario(long idUsuario, String nombre, String login, boolean activo) {
+	public Usuario(long idUsuario, String nombre, String password, int rol) {
 		super();
 		this.idUsuario = idUsuario;
 		this.nombre = nombre;
-		this.login = login;
-		this.activo = activo;
+		this.password = password;
+		this.rol = rol;
 	}
 
 	public String getNombre() {
@@ -31,25 +26,36 @@ public class Usuario {
 		this.nombre = nombre;
 	}
 
-	public String getLogin() {
-		return login;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setLogin(String login) {
-		this.login = login;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public long getIdUsuario() {
 		return idUsuario;
 	}
 		
-	public boolean isActivo() {
-		return activo;
+	public int getRol() {
+		return rol;
 	}
 
-	public void setActivo(boolean activo) {
-		this.activo = activo;
+	public void setRol(int rol) {
+		this.rol = rol;
 	}
-
 	
+	public boolean soyUsuario(String nombre){
+		return this.nombre == nombre;
+	}
+	
+	public UsuarioView crearViewUsuario(){
+		UsuarioView usuarioViewTmp = new UsuarioView(this.idUsuario, this.nombre, this.password, this.rol); 
+		return usuarioViewTmp;
+	}
+	
+	public static Usuario recuperarUsuario(String nombre){
+		return UsuarioPersistencia.getInstance().recuperarUsuario(nombre);
+	}
 }

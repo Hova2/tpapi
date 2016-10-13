@@ -57,6 +57,7 @@ public class ReclamoFaltante extends Reclamo {
 
 	public void setEstado(int estado) {
 		this.estado = estado;
+		ReclamoPersistencia.getInstance().cambiarEstado(estado, super.getNroReclamo());
 	}
 
 	public Date getFechaAlta() {
@@ -77,5 +78,11 @@ public class ReclamoFaltante extends Reclamo {
 
 	public int getTipoReclamo() {
 		return tipoReclamo;
+	}
+	
+	public void agregarAccion(String detalle){
+		Accion accionTmp = new Accion(detalle);
+		acciones.add(accionTmp);
+		ReclamoPersistencia.getInstance().insertarAccion(accionTmp, super.getNroReclamo());
 	}
 }
