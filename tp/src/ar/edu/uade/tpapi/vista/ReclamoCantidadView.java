@@ -3,8 +3,6 @@ package ar.edu.uade.tpapi.vista;
 import java.util.Date;
 import java.util.Vector;
 
-import ar.edu.uade.tpapi.modelo.Accion;
-
 public class ReclamoCantidadView {
 
 	private long nroReclamo;
@@ -57,7 +55,7 @@ public class ReclamoCantidadView {
 	public Vector<ItemProductoReclamoView> getProductos() {
 		return productos;
 	}
-	public Vector<Accion> getAcciones() {
+	public Vector<AccionView> getAcciones() {
 		return acciones;
 	}	
 }
