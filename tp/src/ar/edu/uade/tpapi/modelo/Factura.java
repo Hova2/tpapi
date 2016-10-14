@@ -4,6 +4,10 @@ import java.util.Date;
 import java.util.Vector;
 
 import ar.edu.uade.tpapi.persistencia.FacturaPersistencia;
+import ar.edu.uade.tpapi.vista.AccionView;
+import ar.edu.uade.tpapi.vista.ClienteView;
+import ar.edu.uade.tpapi.vista.FacturaView;
+import ar.edu.uade.tpapi.vista.ItemFacturaView;
 
 public class Factura {
 
@@ -47,7 +51,18 @@ public class Factura {
 		return this.nroFactura == nroFactura;
 	}
 	
+	public FacturaView crearFacturaView(){
+		ClienteView clienteViewTmp = this.cliente.crearViewCliente();
+		Vector<ItemFacturaView> itemsFacturaViewTmp = new Vector<ItemFacturaView>();
+		for(int i = 0; i<itemsFactura.size();i++){
+			ItemFacturaView itemFacturaViewTmp = itemsFactura.get(i).crearItemFacturaView();
+			itemsFacturaViewTmp.add(itemFacturaViewTmp);
+		}
+		FacturaView facturaViewTmp = new FacturaView(this.nroFactura, this.fecha, this.total, clienteViewTmp, itemsFacturaViewTmp);
+		return facturaViewTmp;
+	}
+	
 	public static Factura recuperarFactura(long nroFactura){
 		return FacturaPersistencia.getInstance().recuperarFactura(nroFactura);
-	}
+	} 
 }

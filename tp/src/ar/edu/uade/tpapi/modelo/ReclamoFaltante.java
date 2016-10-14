@@ -4,6 +4,12 @@ import java.util.Date;
 import java.util.Vector;
 
 import ar.edu.uade.tpapi.persistencia.ReclamoPersistencia;
+import ar.edu.uade.tpapi.vista.AccionView;
+import ar.edu.uade.tpapi.vista.ClienteView;
+import ar.edu.uade.tpapi.vista.ItemProductoReclamoView;
+import ar.edu.uade.tpapi.vista.ProductoView;
+import ar.edu.uade.tpapi.vista.ReclamoCantidadView;
+import ar.edu.uade.tpapi.vista.ReclamoFaltanteView;
 
 public class ReclamoFaltante extends Reclamo {
 
@@ -84,5 +90,22 @@ public class ReclamoFaltante extends Reclamo {
 		Accion accionTmp = new Accion(detalle);
 		acciones.add(accionTmp);
 		ReclamoPersistencia.getInstance().insertarAccion(accionTmp, super.getNroReclamo());
+	}
+	
+	public ReclamoFaltanteView crearReclamoFaltanteView(){
+		ClienteView clienteViewTmp = this.cliente.crearViewCliente();
+		Vector<AccionView> accionesViewTmp = new Vector<AccionView>();
+		for(int i = 0; i<this.acciones.size(); i++){
+			AccionView accionViewTmp = this.acciones.get(i).crearViewAccion();
+			accionesViewTmp.add(accionViewTmp);
+		}
+		Vector<ItemProductoReclamoView> productosViewTmp = new Vector<ItemProductoReclamoView>();
+		for(int i = 0; i<this.productos.size(); i++){
+			ItemProductoReclamoView itemProductoReclamoViewTmp = productos.get(i).crearViewItemProductoReclamo();
+			productosViewTmp.add(itemProductoReclamoViewTmp);
+		}
+		ReclamoFaltanteView reclamoFaltanteViewTmp = new ReclamoFaltanteView(super.getNroReclamo(), this.fechaAlta, this.fechaCierre, clienteViewTmp, this.descripcion, 
+				this.estado, this.tipoReclamo, productosViewTmp, accionesViewTmp); 
+		return reclamoFaltanteViewTmp;
 	}
 }

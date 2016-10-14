@@ -10,10 +10,10 @@ public class FacturaView {
 	private long nroFactura;
 	private Date fecha;
 	private float total;
-	private Cliente cliente;
+	private ClienteView cliente;
 	private Vector<ItemFacturaView> itemsFacturaView;
 	
-	public FacturaView(long nroFactura, Date fecha, float total, Cliente cliente,
+	public FacturaView(long nroFactura, Date fecha, float total, ClienteView cliente,
 			Vector<ItemFacturaView> itemsFacturaView) {
 		super();
 		this.nroFactura = nroFactura;
@@ -35,7 +35,7 @@ public class FacturaView {
 		return total;
 	}
 
-	public Cliente getCliente() {
+	public ClienteView getCliente() {
 		return cliente;
 	}
 

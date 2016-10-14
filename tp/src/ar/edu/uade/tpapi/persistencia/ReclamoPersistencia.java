@@ -10,6 +10,9 @@ import java.util.Vector;
 
 import ar.edu.uade.tpapi.modelo.Accion;
 import ar.edu.uade.tpapi.modelo.Cliente;
+import ar.edu.uade.tpapi.modelo.Factura;
+import ar.edu.uade.tpapi.modelo.ItemProductoReclamo;
+import ar.edu.uade.tpapi.modelo.Producto;
 import ar.edu.uade.tpapi.modelo.Reclamo;
 import ar.edu.uade.tpapi.modelo.ReclamoCantidad;
 import ar.edu.uade.tpapi.modelo.ReclamoFacturacion;
@@ -225,7 +228,74 @@ public class ReclamoPersistencia extends AdministradorPersistencia{
 					Vector<Accion> accionesTmp = this.recuperarAccionesReclamo(res.getLong(1));
 					reclamoTmp = new ReclamoZona(res.getLong(1), fechaAltaTmp, fechaCierreTmp, res.getString(4), res.getInt(5), 
 							res.getInt(7), accionesTmp, clienteTmp);
-				} 
+				}
+				if(res.getInt(7) == 1){
+					java.util.Date fechaAltaTmp = new java.util.Date(res.getDate(2).getTime());
+					java.util.Date fechaCierreTmp = null;
+					if(res.getDate(3) != null){
+						fechaCierreTmp = new java.util.Date(res.getDate(3).getTime());
+					}
+					Cliente clienteTmp = Cliente.recuperarCliente(res.getLong(6));
+					Vector<Accion> accionesTmp = this.recuperarAccionesReclamo(res.getLong(1));
+					Vector<ItemProductoReclamo> itemsProductosReclamosTmp = new Vector<ItemProductoReclamo>();
+					Connection con2 = ConnectionDB.getInstance().getConnection();
+					PreparedStatement sta2 = con2.prepareStatement("select * from tpapi.dbo.ItemProductoReclamo where nroIteProdRec=?");
+					sta2.setLong(1, nroReclamo);
+					ResultSet res2 = sta2.executeQuery();
+					while(res2.next()){
+						Producto productoTmp = Producto.recuperarProducto(res2.getLong(2));
+						int cantidadTmp = res2.getInt(3);
+						ItemProductoReclamo itemProductoReclamoTmp = new ItemProductoReclamo(productoTmp, cantidadTmp);
+						itemsProductosReclamosTmp.add(itemProductoReclamoTmp);
+					}
+					
+					reclamoTmp = new ReclamoCantidad(res.getLong(1), fechaAltaTmp, fechaCierreTmp, clienteTmp, res.getString(4), res.getInt(5), 
+							res.getInt(7), accionesTmp, itemsProductosReclamosTmp);
+				}
+				if(res.getInt(7) == 2){
+					java.util.Date fechaAltaTmp = new java.util.Date(res.getDate(2).getTime());
+					java.util.Date fechaCierreTmp = null;
+					if(res.getDate(3) != null){
+						fechaCierreTmp = new java.util.Date(res.getDate(3).getTime());
+					}
+					Cliente clienteTmp = Cliente.recuperarCliente(res.getLong(6));
+					Vector<Accion> accionesTmp = this.recuperarAccionesReclamo(res.getLong(1));
+					Vector<ItemProductoReclamo> itemsProductosReclamosTmp = new Vector<ItemProductoReclamo>();
+					Connection con2 = ConnectionDB.getInstance().getConnection();
+					PreparedStatement sta2 = con2.prepareStatement("select * from tpapi.dbo.ItemProductoReclamo where nroIteProdRec=?");
+					sta2.setLong(1, nroReclamo);
+					ResultSet res2 = sta2.executeQuery();
+					while(res2.next()){
+						Producto productoTmp = Producto.recuperarProducto(res2.getLong(2));
+						int cantidadTmp = res2.getInt(3);
+						ItemProductoReclamo itemProductoReclamoTmp = new ItemProductoReclamo(productoTmp, cantidadTmp);
+						itemsProductosReclamosTmp.add(itemProductoReclamoTmp);
+					}
+					reclamoTmp = new ReclamoFaltante(res.getLong(1), fechaAltaTmp, fechaCierreTmp, clienteTmp, res.getString(4), res.getInt(5), 
+							res.getInt(7), accionesTmp, itemsProductosReclamosTmp);
+				}
+				
+				if(res.getInt(7) == 3){
+					java.util.Date fechaAltaTmp = new java.util.Date(res.getDate(2).getTime());
+					java.util.Date fechaCierreTmp = null;
+					if(res.getDate(3) != null){
+						fechaCierreTmp = new java.util.Date(res.getDate(3).getTime());
+					}
+					Cliente clienteTmp = Cliente.recuperarCliente(res.getLong(6));
+					Vector<Accion> accionesTmp = this.recuperarAccionesReclamo(res.getLong(1));
+					Vector<Factura> facturasTmp = new Vector<Factura>();
+					Connection con2 = ConnectionDB.getInstance().getConnection();
+					PreparedStatement sta2 = con2.prepareStatement("select * from tpapi.dbo.FacturaReclamo where nroReclamo=?");
+					sta2.setLong(1, nroReclamo);
+					ResultSet res2 = sta2.executeQuery();
+					while(res2.next()){
+						Factura facturaTmp = Factura.recuperarFactura(res2.getLong(2));
+						facturasTmp.add(facturaTmp);
+					}
+					reclamoTmp = new ReclamoFacturacion(res.getLong(1), fechaAltaTmp, fechaCierreTmp, clienteTmp, res.getString(4), res.getInt(5), 
+							res.getInt(7), accionesTmp, facturasTmp);
+				}
+				
 			}
 		}
 		catch (Exception e){

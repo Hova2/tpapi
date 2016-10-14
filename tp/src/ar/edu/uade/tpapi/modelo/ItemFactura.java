@@ -1,5 +1,8 @@
 package ar.edu.uade.tpapi.modelo;
 
+import ar.edu.uade.tpapi.vista.ItemFacturaView;
+import ar.edu.uade.tpapi.vista.ProductoView;
+
 public class ItemFactura {
 
 	private Producto producto;
@@ -17,5 +20,11 @@ public class ItemFactura {
 
 	public int getCantidad() {
 		return cantidad;
+	}
+	
+	public ItemFacturaView crearItemFacturaView(){
+		ProductoView productoViewTmp = producto.crearViewProducto();
+		ItemFacturaView itemFacturaViewTmp = new ItemFacturaView(productoViewTmp, this.cantidad);
+		return itemFacturaViewTmp;
 	}
 }

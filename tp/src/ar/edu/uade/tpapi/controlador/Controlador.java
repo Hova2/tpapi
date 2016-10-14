@@ -15,6 +15,9 @@ import ar.edu.uade.tpapi.modelo.ReclamoZona;
 import ar.edu.uade.tpapi.modelo.Usuario;
 import ar.edu.uade.tpapi.vista.ClienteView;
 import ar.edu.uade.tpapi.vista.ItemProductoReclamoView;
+import ar.edu.uade.tpapi.vista.ReclamoCantidadView;
+import ar.edu.uade.tpapi.vista.ReclamoFacturacionView;
+import ar.edu.uade.tpapi.vista.ReclamoFaltanteView;
 import ar.edu.uade.tpapi.vista.ReclamoZonaView;
 import ar.edu.uade.tpapi.vista.UsuarioView;
 
@@ -217,6 +220,45 @@ public class Controlador {
 				ReclamoZona reclamoZonaTmp = (ReclamoZona)reclamosTmp.get(i);
 				ReclamoZonaView reclamoZonaViewTmp = reclamoZonaTmp.crearReclamoZonaView();
 				reclamosViewTmp.add(reclamoZonaViewTmp);
+			}
+		}
+		return reclamosViewTmp;
+	}
+	
+	public Vector<ReclamoCantidadView> listarReclamosCantidad(){
+		Vector<Reclamo> reclamosTmp = this.listarReclamos();
+		Vector<ReclamoCantidadView> reclamosViewTmp = new Vector<ReclamoCantidadView>();
+		for(int i = 0; i<reclamosTmp.size(); i++){
+			if(reclamosTmp.get(i).getClass().getSimpleName().equals("ReclamoCantidad")){
+				ReclamoCantidad reclamoCantidadTmp = (ReclamoCantidad)reclamosTmp.get(i);
+				ReclamoCantidadView reclamoCantidadViewTmp = reclamoCantidadTmp.crearReclamoCantidadView();
+				reclamosViewTmp.add(reclamoCantidadViewTmp);
+			}
+		}
+		return reclamosViewTmp;
+	}
+	
+	public Vector<ReclamoFacturacionView> listarReclamosFacturacion(){
+		Vector<Reclamo> reclamosTmp = this.listarReclamos();
+		Vector<ReclamoFacturacionView> reclamosViewTmp = new Vector<ReclamoFacturacionView>();
+		for(int i = 0; i<reclamosTmp.size(); i++){
+			if(reclamosTmp.get(i).getClass().getSimpleName().equals("ReclamoFacturacion")){
+				ReclamoFacturacion reclamoFacturacionTmp = (ReclamoFacturacion)reclamosTmp.get(i);
+				ReclamoFacturacionView reclamoFacturacionViewTmp = reclamoFacturacionTmp.crearReclamoFacturacionView();
+				reclamosViewTmp.add(reclamoFacturacionViewTmp);
+			}
+		}
+		return reclamosViewTmp;
+	}
+	
+	public Vector<ReclamoFaltanteView> listarReclamosFaltante(){
+		Vector<Reclamo> reclamosTmp = this.listarReclamos();
+		Vector<ReclamoFaltanteView> reclamosViewTmp = new Vector<ReclamoFaltanteView>();
+		for(int i = 0; i<reclamosTmp.size(); i++){
+			if(reclamosTmp.get(i).getClass().getSimpleName().equals("ReclamoFaltante")){
+				ReclamoFaltante reclamoFaltanteTmp = (ReclamoFaltante)reclamosTmp.get(i);
+				ReclamoFaltanteView reclamoFaltanteViewTmp = reclamoFaltanteTmp.crearReclamoFaltanteView();
+				reclamosViewTmp.add(reclamoFaltanteViewTmp);
 			}
 		}
 		return reclamosViewTmp;

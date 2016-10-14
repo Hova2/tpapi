@@ -1,5 +1,8 @@
 package ar.edu.uade.tpapi.modelo;
 
+import ar.edu.uade.tpapi.vista.ItemProductoReclamoView;
+import ar.edu.uade.tpapi.vista.ProductoView;
+
 public class ItemProductoReclamo {
 
 	private Producto producto;
@@ -17,6 +20,12 @@ public class ItemProductoReclamo {
 
 	public int getCantidad() {
 		return cantidad;
+	}
+	
+	public ItemProductoReclamoView crearViewItemProductoReclamo(){
+		ProductoView productoViewTmp = producto.crearViewProducto();
+		ItemProductoReclamoView itemProductoReclamoViewTmp = new ItemProductoReclamoView(productoViewTmp, this.cantidad);
+		return itemProductoReclamoViewTmp;
 	}
 
 }
