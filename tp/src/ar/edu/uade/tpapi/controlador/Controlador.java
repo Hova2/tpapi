@@ -15,6 +15,9 @@ import ar.edu.uade.tpapi.modelo.ReclamoZona;
 import ar.edu.uade.tpapi.modelo.Usuario;
 import ar.edu.uade.tpapi.vista.ClienteView;
 import ar.edu.uade.tpapi.vista.ItemProductoReclamoView;
+import ar.edu.uade.tpapi.vista.PantallaResponsableDistribucion;
+import ar.edu.uade.tpapi.vista.PantallaResponsableFacturacion;
+import ar.edu.uade.tpapi.vista.PantallaResponsableZona;
 import ar.edu.uade.tpapi.vista.ReclamoCantidadView;
 import ar.edu.uade.tpapi.vista.ReclamoFacturacionView;
 import ar.edu.uade.tpapi.vista.ReclamoFaltanteView;
@@ -29,6 +32,9 @@ public class Controlador {
 	private Vector<Producto> productos;
 	private Vector<Factura> facturas;
 	private Vector<Usuario> usuarios;
+	private Vector<PantallaResponsableDistribucion> suscriptoresDistribucion;
+	private Vector<PantallaResponsableFacturacion> suscriptoresFacturacion;
+	private Vector<PantallaResponsableZona> suscriptoresZona;
 	
 	private Controlador() {
 		clientes = new Vector<Cliente>();
