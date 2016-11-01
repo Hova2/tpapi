@@ -349,9 +349,9 @@ public class Controlador {
 		return reclamoTmp;
 	}
 	
-	public void notifyDistribucion(ReclamoZona rz, ReclamoProducto rp, ReclamoFaltante rf){
+	/*public void notifyDistribucion(ReclamoZona rz, ReclamoProducto rp, ReclamoFaltante rf){
 		for (int i=0; i<suscriptoresDistribucion.size();i++){
 			PantallaResponsableDistribucion.
 		}
-	}
+	}*/
 }

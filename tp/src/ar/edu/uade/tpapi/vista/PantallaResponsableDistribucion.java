@@ -1,11 +1,17 @@
 package ar.edu.uade.tpapi.vista;
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
-
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -25,10 +31,10 @@ import javax.swing.SwingUtilities;
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
 public class PantallaResponsableDistribucion extends javax.swing.JFrame {
-	private JScrollPane jScrollPane1;
-	private JButton aceptar;
-	private JButton cancelar;
-	private JTable jTable1;
+	private JButton agregar;
+	private JButton listar;
+	private JButton salir;
+	private JButton consultar;
 
 	/**
 	* Auto-generated main method to display this JFrame
@@ -51,34 +57,42 @@ public class PantallaResponsableDistribucion extends javax.swing.JFrame {
 	private void initGUI() {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-			this.setTitle("Lista de Reclamos");
-			{
-				jScrollPane1 = new JScrollPane();
-				getContentPane().add(jScrollPane1, BorderLayout.NORTH);
-				jScrollPane1.setPreferredSize(new java.awt.Dimension(384, 219));
-				{
-					TableModel jTable1Model = 
-							new DefaultTableModel(
-									new String[][] { { "One", "Two" }, { "Three", "Four" } },
-									new String[] { "Column 1", "Column 2" });
-					jTable1 = new JTable();
-					jScrollPane1.setViewportView(jTable1);
-					jTable1.setModel(jTable1Model);
-				}
-			}
-			{
-				cancelar = new JButton();
-				getContentPane().add(cancelar, BorderLayout.EAST);
-				cancelar.setText("Cancelar");
-				cancelar.setPreferredSize(new java.awt.Dimension(194, 42));
-			}
-			{
-				aceptar = new JButton();
-				getContentPane().add(aceptar, BorderLayout.CENTER);
-				aceptar.setText("Aceptar");
-			}
+			this.setTitle("Administración de Reclamos  - Distribución");
 			pack();
 			setSize(400, 300);
+			getContentPane().setLayout(null);
+			{
+				agregar = new JButton();
+				getContentPane().add(agregar);
+				agregar.setText("Agregar Reclamo");
+				agregar.setBounds(121, 36, 114, 23);
+			}
+			{
+				consultar = new JButton();
+				getContentPane().add(consultar);
+				consultar.setText("Consultar Reclamo");
+				consultar.setBounds(121, 83, 114, 23);
+			}
+			{
+				listar = new JButton();
+				getContentPane().add(listar);
+				listar.setText("Listar Reclamos");
+				listar.setBounds(121, 132, 114, 23);
+				listar.addActionListener(new ActionListener(){
+					public void actionPerformed(ActionEvent evt) {
+						ListaReclamosResponsableDistribucion ld = new ListaReclamosResponsableDistribucion();
+						ld.setVisible(true);
+					}
+				});
+			}
+			{
+				salir = new JButton();
+				getContentPane().add(salir);
+				salir.setText("Salir");
+				salir.setBounds(121, 191, 114, 23);
+			}
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
