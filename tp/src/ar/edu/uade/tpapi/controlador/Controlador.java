@@ -42,6 +42,9 @@ public class Controlador {
 		productos = new Vector<Producto>();
 		facturas = new Vector<Factura>();
 		usuarios = new Vector<Usuario>();
+		suscriptoresDistribucion = new Vector<PantallaResponsableDistribucion>();
+		suscriptoresFacturacion = new Vector<PantallaResponsableFacturacion>();
+		suscriptoresZona = new Vector<PantallaResponsableZona>();
 	}
 	
 	public static Controlador getInstance(){
@@ -344,5 +347,11 @@ public class Controlador {
 				reclamos.add(reclamoTmp);
 		}
 		return reclamoTmp;
+	}
+	
+	public void notifyDistribucion(ReclamoZona rz, ReclamoProducto rp, ReclamoFaltante rf){
+		for (int i=0; i<suscriptoresDistribucion.size();i++){
+			PantallaResponsableDistribucion.
+		}
 	}
 }
