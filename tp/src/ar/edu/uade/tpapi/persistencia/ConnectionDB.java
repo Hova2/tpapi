@@ -32,7 +32,7 @@ public class ConnectionDB {
 	
 	private void getConfiguration() {
 		
-		Properties properties;
+		/*Properties properties;
 	    
 	    try {
 	    	FileInputStream file = new FileInputStream("ConfigDB.properties");	 
@@ -47,7 +47,11 @@ public class ConnectionDB {
 	    catch (Exception e) {
 	    	System.out.println("Mensaje Error: " + e.getMessage());
 			System.out.println("Stack Trace: " + e.getStackTrace());
-	    }
+	    }*/
+		jdbc="jdbc:sqlserver://";
+		server="192.168.56.10:1433";
+		user="sa";
+		password="welcome1";
 	}
 	
 	private Connection createConnection() {
