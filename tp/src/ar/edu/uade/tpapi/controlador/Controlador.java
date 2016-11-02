@@ -354,4 +354,16 @@ public class Controlador {
 			PantallaResponsableDistribucion.
 		}
 	}*/
+	
+	public Vector<Vector<String>> armarMatrizReclamosZona(){
+		Vector<Vector<String>> lista = new Vector<Vector<String>>();
+		Vector<Reclamo> reclamosTmp = this.listarReclamos();
+		for(int i = 0; i<reclamosTmp.size(); i++){
+			if(reclamosTmp.get(i).getClass().getSimpleName().equals("ReclamoZona")){
+				//ReclamoZona reclamoZonaTmp = (ReclamoZona)reclamosTmp.get(i);
+				lista.add(reclamosTmp.elementAt(i).toVector());				
+			}
+		}
+		return lista;
+	}
 }

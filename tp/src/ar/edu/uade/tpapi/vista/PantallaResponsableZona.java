@@ -46,6 +46,8 @@ public class PantallaResponsableZona extends javax.swing.JFrame {
 	private JLabel nroReclamo;
 	private JLabel lNombreCliente;
 	private JTextArea descripcion;
+	private JMenuItem listarReclamosZona;
+	private JMenu listarReclamos;
 	private JLabel lDescripcion;
 	private JLabel estado;
 	private JLabel lEstado;
@@ -58,6 +60,8 @@ public class PantallaResponsableZona extends javax.swing.JFrame {
 	
 	private JScrollPane jScrollPane1;
 	private JMenuItem cambiarEstado;
+	private JMenu lista;
+	private JMenuItem listaDeReclamos;
 	private JMenu estados;
 	private JMenuItem verAcciones;
 	private JMenuItem altaAccion;
@@ -92,6 +96,7 @@ public class PantallaResponsableZona extends javax.swing.JFrame {
 				setJMenuBar(jMenuBar1);
 				jMenuBar1.add(getJMenu1());
 				jMenuBar1.add(getEstados());
+				jMenuBar1.add(getListarReclamos());
 				GridLayout panelLayout = new GridLayout(size, 1);
 				panelLayout.setVgap(5);
 				panel = new JPanel();
@@ -270,6 +275,28 @@ public class PantallaResponsableZona extends javax.swing.JFrame {
 			jScrollPane1.setBounds(0, 25, 775, 269);
 		}
 		return jScrollPane1;
+	}
+	
+	private JMenu getListarReclamos() {
+		if(listarReclamos == null) {
+			listarReclamos = new JMenu();
+			listarReclamos.setText("Listar Reclamos");
+			listarReclamos.add(getListarReclamosZona());
+		}
+		return listarReclamos;
+	}
+	
+	private JMenuItem getListarReclamosZona() {
+		if(listarReclamosZona == null) {
+			listarReclamosZona = new JMenuItem();
+			listarReclamosZona.setText("Listar Reclamos de Zona");
+			listarReclamosZona.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent evt) {
+					ListaReclamosResponsableZona.getInstance().setVisible(true);
+				}
+			});
+		}
+		return listarReclamosZona;
 	}
 
 }

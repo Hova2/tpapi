@@ -42,4 +42,6 @@ public abstract class Reclamo {
 		}
 		return ++nroUltimoReclamo;
 	}
+	
+	public abstract Vector<String> toVector();
 }

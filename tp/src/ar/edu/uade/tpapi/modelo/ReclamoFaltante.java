@@ -86,6 +86,10 @@ public class ReclamoFaltante extends Reclamo {
 		return tipoReclamo;
 	}
 	
+	public Vector<String> toVector(){
+		return null;
+	}
+	
 	public void agregarAccion(String detalle){
 		Accion accionTmp = new Accion(detalle);
 		acciones.add(accionTmp);
@@ -108,4 +112,6 @@ public class ReclamoFaltante extends Reclamo {
 				this.estado, this.tipoReclamo, productosViewTmp, accionesViewTmp); 
 		return reclamoFaltanteViewTmp;
 	}
+	
+	
 }

@@ -107,5 +107,11 @@ public class ReclamoCantidad extends Reclamo {
 		ReclamoCantidadView reclamoCantidadViewTmp = new ReclamoCantidadView(super.getNroReclamo(), this.fechaAlta, this.fechaCierre, this.descripcion, this.estado, 
 				this.tipoReclamo, clienteViewTmp, productosViewTmp, accionesViewTmp);
 		return reclamoCantidadViewTmp;
+	}
+
+	@Override
+	public Vector<String> toVector() {
+		// TODO Auto-generated method stub
+		return null;
 	} 
 }

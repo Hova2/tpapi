@@ -91,5 +91,19 @@ public class ReclamoZona extends Reclamo {
 		ReclamoZonaView reclamoZonaViewTmp = new ReclamoZonaView(super.getNroReclamo(), this.fechaAlta, this.fechaCierre, this.descripcion, 
 				this.estado, this.tipoReclamo, clienteViewTmp, accionesViewTmp);
 		return reclamoZonaViewTmp;
+	}
+
+	@Override
+	public Vector<String> toVector() {
+		Vector<String> v = new Vector<String>();		
+		v.add(String.valueOf(super.getNroReclamo()));
+		v.add(String.valueOf(this.getFechaAlta()));
+		v.add(String.valueOf(this.getFechaCierre()));
+		v.add(String.valueOf(this.getDescripcion()));
+		v.add(String.valueOf(this.getEstado()));
+		v.add(String.valueOf(this.getTipoReclamo()));
+		v.add(String.valueOf(this.getCliente()));
+		//v.add(String.valueOf(this.getProductos()));
+		return v;
 	} 
 }
