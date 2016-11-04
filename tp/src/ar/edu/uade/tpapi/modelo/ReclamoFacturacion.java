@@ -109,10 +109,4 @@ public class ReclamoFacturacion extends Reclamo {
 				this.estado, this.tipoReclamo, clienteViewTmp, facturasViewTmp, accionesViewTmp); 
 		return reclamoFacturacionViewTmp;
 	}
-
-	@Override
-	public Vector<String> toVector() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

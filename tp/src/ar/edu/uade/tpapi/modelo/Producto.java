@@ -1,5 +1,7 @@
 package ar.edu.uade.tpapi.modelo;
 
+import java.util.Vector;
+
 import ar.edu.uade.tpapi.persistencia.ProductoPersistencia;
 import ar.edu.uade.tpapi.vista.ProductoView;
 
@@ -66,5 +68,9 @@ public class Producto {
 	
 	public static Producto recuperarProducto(long codigo){
 		return ProductoPersistencia.getInstance().recuperarProducto(codigo);
+	}
+
+	public static Vector<Producto> recuperarProductos() {
+		return ProductoPersistencia.getInstance().recuperarProductos();
 	}
 }

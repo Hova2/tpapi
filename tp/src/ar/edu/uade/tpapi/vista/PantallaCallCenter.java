@@ -25,7 +25,10 @@ public class PantallaCallCenter extends javax.swing.JFrame{
 	private JMenuBar jMenuBar1;
 	private JMenu jMenu1;
 	private JMenuItem jMenuItem1;
-	
+	private JMenuItem reclamoFaltante;
+	private JMenuItem reclamoFacturacion;
+	private JMenuItem reclamoCantidad;
+
 	public PantallaCallCenter() {
 		super();
 		initGUI();
@@ -52,6 +55,36 @@ public class PantallaCallCenter extends javax.swing.JFrame{
 							jMenuItem1.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent evt) {
 									PantallaReclamoZona.getInstance().setVisible(true);
+								}
+							});
+						}
+						{
+							reclamoCantidad = new JMenuItem();
+							jMenu1.add(reclamoCantidad);
+							reclamoCantidad.setText("Reclamo Cantidad");
+							reclamoCantidad.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent evt) {
+									PantallaReclamoCantidad.getInstance().setVisible(true);
+								}
+							});
+						}
+						{
+							reclamoFacturacion = new JMenuItem();
+							jMenu1.add(reclamoFacturacion);
+							reclamoFacturacion.setText("Reclamo Facturacion");
+							reclamoFacturacion.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent evt) {
+									PantallaReclamoFacturacion.getInstance().setVisible(true);
+								}
+							});
+						}
+						{
+							reclamoFaltante = new JMenuItem();
+							jMenu1.add(reclamoFaltante);
+							reclamoFaltante.setText("Reclamo Faltante");
+							reclamoFaltante.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent evt) {
+									PantallaReclamoFaltante.getInstance().setVisible(true);
 								}
 							});
 						}

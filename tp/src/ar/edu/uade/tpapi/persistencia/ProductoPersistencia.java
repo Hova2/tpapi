@@ -4,9 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Vector;
 
+import ar.edu.uade.tpapi.modelo.Accion;
+import ar.edu.uade.tpapi.modelo.Cliente;
 import ar.edu.uade.tpapi.modelo.Producto;
+import ar.edu.uade.tpapi.modelo.Reclamo;
+import ar.edu.uade.tpapi.modelo.ReclamoZona;
 
 public class ProductoPersistencia extends AdministradorPersistencia {
 
@@ -110,5 +115,43 @@ public class ProductoPersistencia extends AdministradorPersistencia {
 			}
 		}
 		return productoTmp;
+	}
+	
+	public Vector<Producto> recuperarProductos(){
+		Connection con = null;
+		Statement sta = null;
+		Vector<Producto> productosTmp = new Vector<Producto>();
+		try{
+			con = ConnectionDB.getInstance().getConnection();
+			sta = con.createStatement();
+			ResultSet res = sta.executeQuery("select * from tpapi.dbo.Producto");
+			while(res.next()){
+				long codigo = res.getLong(1);
+				String titulo = res.getString(2);
+				String descripcion = res.getString(3);
+				float precio = res.getFloat(4);
+				boolean estado = res.getBoolean(5);
+				Producto producto = new Producto(codigo,titulo,descripcion,precio,estado);
+				productosTmp.add(producto);
+				} 
+		}
+		catch (Exception e){
+			System.out.println(e);
+		}
+		finally{
+			try{
+				if(sta!=null)
+					sta.close();
+			}
+			catch (SQLException e){}
+			try{
+				if(con!=null)
+					ConnectionDB.getInstance().realeaseConnection(con);
+			}
+			catch(Exception se){
+				se.printStackTrace();
+			}
+		}
+		return productosTmp;
 	}
 }

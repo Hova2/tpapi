@@ -339,6 +339,19 @@ public class ReclamoPersistencia extends AdministradorPersistencia{
 							res.getInt(7), accionesTmp, clienteTmp);
 					reclamosTmp.add(reclamoZonaTmp);
 				} 
+				if(res.getInt(7) == 1){
+					java.util.Date fechaAltaTmp = new java.util.Date(res.getDate(2).getTime());
+					java.util.Date fechaCierreTmp = null;
+					if(res.getDate(3) != null){
+						fechaCierreTmp = new java.util.Date(res.getDate(3).getTime());
+					}
+					Cliente clienteTmp = Cliente.recuperarCliente(res.getLong(6));
+					Vector<Accion> accionesTmp = this.recuperarAccionesReclamo(res.getLong(1));
+					Vector<Productos> productosTmp = this.recuperarProductosReclamo
+					ReclamoZona reclamoZonaTmp = new ReclamoZona(res.getLong(1), fechaAltaTmp, fechaCierreTmp, res.getString(4), res.getInt(5), 
+							res.getInt(7), accionesTmp, clienteTmp);
+					reclamosTmp.add(reclamoZonaTmp);
+				} 
 			}
 		}
 		catch (Exception e){
@@ -409,6 +422,42 @@ public class ReclamoPersistencia extends AdministradorPersistencia{
 				java.util.Date fechaAltaTmp = new java.util.Date(res.getDate(1).getTime());
 				Accion accionTmp = new Accion(fechaAltaTmp, res.getString(2));
 				accionesTmp.add(accionTmp);
+					
+			} 
+		}
+		catch (Exception e){
+			System.out.println(e);
+		}
+		finally{
+			try{
+				if(sta!=null)
+					sta.close();
+			}
+			catch (SQLException e){}
+			try{
+				if(con!=null)
+					ConnectionDB.getInstance().realeaseConnection(con);
+			}
+			catch(Exception se){
+				se.printStackTrace();
+			}
+		}
+		return accionesTmp;
+	}
+	
+	private Vector<Accion> recuperarProductosReclamo(long codigo){
+		Connection con = null;
+		PreparedStatement sta = null;
+		Vector<Producto> productosTmp = new Vector<Producto>();
+		try{
+			con = ConnectionDB.getInstance().getConnection();
+			sta = con.prepareStatement("select * from tpapi.dbo.Producto where codigo=?");
+			sta.setLong(1, codigo);
+			ResultSet res = sta.executeQuery();
+			while(res.next()){
+				//java.util.Date fechaAltaTmp = new java.util.Date(res.getDate(1).getTime());
+				Producto productoTmp = new Producto(codigo, res.getString(2));
+				productosTmp.add(accionTmp);
 					
 			} 
 		}

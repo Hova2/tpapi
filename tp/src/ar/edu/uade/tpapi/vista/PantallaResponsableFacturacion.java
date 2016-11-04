@@ -22,6 +22,19 @@ import javax.swing.border.LineBorder;
 
 import ar.edu.uade.tpapi.controlador.Controlador;
 
+
+/**
+* This code was edited or generated using CloudGarden's Jigloo
+* SWT/Swing GUI Builder, which is free for non-commercial
+* use. If Jigloo is being used commercially (ie, by a corporation,
+* company or business for any purpose whatever) then you
+* should purchase a license for each developer using Jigloo.
+* Please visit www.cloudgarden.com for details.
+* Use of Jigloo implies acceptance of these licensing terms.
+* A COMMERCIAL LICENSE HAS NOT BEEN PURCHASED FOR
+* THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
+* LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
+*/
 public class PantallaResponsableFacturacion extends javax.swing.JFrame {
 
 	private JLabel nroReclamo;
@@ -40,6 +53,7 @@ public class PantallaResponsableFacturacion extends javax.swing.JFrame {
 	private JScrollPane jScrollPane1;
 	private JMenuItem cambiarEstado;
 	private JMenu estados;
+
 	private JMenuItem verAcciones;
 	private JMenuItem altaAccion;
 	private JMenu acciones;
@@ -58,7 +72,7 @@ public class PantallaResponsableFacturacion extends javax.swing.JFrame {
 		try {
 			setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 			pack();
-			this.setSize(640, 938);
+			this.setSize(640, 468);
 			setLocationRelativeTo(null);
 			this.setTitle("Responsable Facturacion");
 			BorderLayout thisLayout = new BorderLayout();
@@ -215,7 +229,7 @@ public class PantallaResponsableFacturacion extends javax.swing.JFrame {
 			verAcciones.setText("Buscar acciones");
 			verAcciones.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent evt) {
-					PantallaBuscarAccionReclamo pBAR = new PantallaBuscarAccionReclamo(reclamosFacturacionView);
+					PantallaBuscarAccionReclamoFacturacion pBAR = new PantallaBuscarAccionReclamoFacturacion(reclamosFacturacionView);
 					pBAR.setVisible(true);
 				}
 			});
@@ -245,6 +259,8 @@ public class PantallaResponsableFacturacion extends javax.swing.JFrame {
 		return cambiarEstado;
 	}
 	
+	
+	
 	private JScrollPane getJScrollPane1() {
 		if(jScrollPane1 == null) {
 			jScrollPane1 = new JScrollPane();
@@ -252,6 +268,5 @@ public class PantallaResponsableFacturacion extends javax.swing.JFrame {
 		}
 		return jScrollPane1;
 	}
-
 
 }

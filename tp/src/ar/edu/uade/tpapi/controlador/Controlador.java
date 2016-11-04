@@ -136,6 +136,11 @@ public class Controlador {
 		return productoTmp;
 	}
 	
+	public Vector<Producto> listarProductos(){
+		Vector<Producto> productosTmp = Producto.recuperarProductos();
+		return productosTmp;
+	}
+	
 	/* Metodos para la administracion de las facturas */
 	
 	private Factura buscarFactura(long nroFactura){
@@ -349,21 +354,13 @@ public class Controlador {
 		return reclamoTmp;
 	}
 	
-	/*public void notifyDistribucion(ReclamoZona rz, ReclamoProducto rp, ReclamoFaltante rf){
-		for (int i=0; i<suscriptoresDistribucion.size();i++){
-			PantallaResponsableDistribucion.
+	public Vector<Cliente> clientesMasActivos(){
+		Vector<Reclamo> reclamosTmp = Reclamo.recuperarReclamos();
+		Vector<Cliente> clientesActivos = new Vector<Cliente>();
+		for (int i=0;i<reclamosTmp.size();i++){
+			clientesActivos.add(reclamos.elementAt(i))
 		}
-	}*/
-	
-	public Vector<Vector<String>> armarMatrizReclamosZona(){
-		Vector<Vector<String>> lista = new Vector<Vector<String>>();
-		Vector<Reclamo> reclamosTmp = this.listarReclamos();
-		for(int i = 0; i<reclamosTmp.size(); i++){
-			if(reclamosTmp.get(i).getClass().getSimpleName().equals("ReclamoZona")){
-				//ReclamoZona reclamoZonaTmp = (ReclamoZona)reclamosTmp.get(i);
-				lista.add(reclamosTmp.elementAt(i).toVector());				
-			}
-		}
-		return lista;
 	}
+	
+
 }

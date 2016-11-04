@@ -46,10 +46,4 @@ public class ReclamoProducto extends Reclamo {
 	public Vector<Reclamo> getReclamos() {
 		return reclamos;
 	}
-
-	@Override
-	public Vector<String> toVector() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
