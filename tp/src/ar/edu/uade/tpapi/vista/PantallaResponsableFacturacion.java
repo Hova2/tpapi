@@ -1,10 +1,6 @@
 package ar.edu.uade.tpapi.vista;
-
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
 import java.util.Vector;
 
@@ -16,12 +12,18 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.WindowConstants;
-import javax.swing.SwingUtilities;
 import javax.swing.border.LineBorder;
 
 import ar.edu.uade.tpapi.controlador.Controlador;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
 * This code was edited or generated using CloudGarden's Jigloo
@@ -37,6 +39,10 @@ import ar.edu.uade.tpapi.controlador.Controlador;
 */
 public class PantallaResponsableFacturacion extends javax.swing.JFrame {
 
+	/**
+	* Auto-generated main method to display this JFrame
+	*/
+	
 	private JLabel nroReclamo;
 	private JLabel lNombreCliente;
 	private JTextArea descripcion;
@@ -53,7 +59,6 @@ public class PantallaResponsableFacturacion extends javax.swing.JFrame {
 	private JScrollPane jScrollPane1;
 	private JMenuItem cambiarEstado;
 	private JMenu estados;
-
 	private JMenuItem verAcciones;
 	private JMenuItem altaAccion;
 	private JMenu acciones;
@@ -74,7 +79,7 @@ public class PantallaResponsableFacturacion extends javax.swing.JFrame {
 			pack();
 			this.setSize(640, 468);
 			setLocationRelativeTo(null);
-			this.setTitle("Responsable Facturacion");
+			this.setTitle("Responsable facturacion");
 			BorderLayout thisLayout = new BorderLayout();
 			getContentPane().setLayout(thisLayout);
 			this.setPreferredSize(new java.awt.Dimension(640, 938));
@@ -229,8 +234,8 @@ public class PantallaResponsableFacturacion extends javax.swing.JFrame {
 			verAcciones.setText("Buscar acciones");
 			verAcciones.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent evt) {
-					PantallaBuscarAccionReclamoFacturacion pBAR = new PantallaBuscarAccionReclamoFacturacion(reclamosFacturacionView);
-					pBAR.setVisible(true);
+					PantallaBuscarAccionReclamoFacturacion pBARF = new PantallaBuscarAccionReclamoFacturacion(reclamosFacturacionView);
+					pBARF.setVisible(true);
 				}
 			});
 		}
@@ -258,8 +263,6 @@ public class PantallaResponsableFacturacion extends javax.swing.JFrame {
 		}
 		return cambiarEstado;
 	}
-	
-	
 	
 	private JScrollPane getJScrollPane1() {
 		if(jScrollPane1 == null) {

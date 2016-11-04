@@ -234,7 +234,7 @@ public class PantallaResponsableZona extends javax.swing.JFrame {
 			verAcciones.setText("Buscar acciones");
 			verAcciones.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent evt) {
-					PantallaBuscarAccionReclamo pBAR = new PantallaBuscarAccionReclamo(reclamosZonaView);
+					PantallaBuscarAccionReclamoZona pBAR = new PantallaBuscarAccionReclamoZona(reclamosZonaView);
 					pBAR.setVisible(true);
 				}
 			});

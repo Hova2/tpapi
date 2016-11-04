@@ -28,7 +28,7 @@ import ar.edu.uade.tpapi.controlador.Controlador;
 * THIS MACHINE, SO JIGLOO OR THIS CODE CANNOT BE USED
 * LEGALLY FOR ANY CORPORATE OR COMMERCIAL PURPOSE.
 */
-public class PantallaBuscarAccionReclamo extends javax.swing.JFrame {
+public class PantallaBuscarAccionReclamoZona extends javax.swing.JFrame {
 
 	private JLabel lNroReclamo;
 	private JButton aceptar;
@@ -41,7 +41,7 @@ public class PantallaBuscarAccionReclamo extends javax.swing.JFrame {
 	*/
 	
 	
-	public PantallaBuscarAccionReclamo(Vector<ReclamoZonaView> reclamosZonaView) {
+	public PantallaBuscarAccionReclamoZona(Vector<ReclamoZonaView> reclamosZonaView) {
 		super();
 		this.reclamosZonaView = reclamosZonaView;
 		initGUI();

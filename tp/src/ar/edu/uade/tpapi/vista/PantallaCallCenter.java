@@ -64,7 +64,7 @@ public class PantallaCallCenter extends javax.swing.JFrame{
 							reclamoCantidad.setText("Reclamo Cantidad");
 							reclamoCantidad.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent evt) {
-									PantallaReclamoCantidad.getInstance().setVisible(true);
+									//PantallaReclamoCantidad.getInstance().setVisible(true);
 								}
 							});
 						}
@@ -74,7 +74,7 @@ public class PantallaCallCenter extends javax.swing.JFrame{
 							reclamoFacturacion.setText("Reclamo Facturacion");
 							reclamoFacturacion.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent evt) {
-									PantallaReclamoFacturacion.getInstance().setVisible(true);
+									//PantallaReclamoFacturacion.getInstance().setVisible(true);
 								}
 							});
 						}
@@ -84,7 +84,7 @@ public class PantallaCallCenter extends javax.swing.JFrame{
 							reclamoFaltante.setText("Reclamo Faltante");
 							reclamoFaltante.addActionListener(new ActionListener() {
 								public void actionPerformed(ActionEvent evt) {
-									PantallaReclamoFaltante.getInstance().setVisible(true);
+									//PantallaReclamoFaltante.getInstance().setVisible(true);
 								}
 							});
 						}
