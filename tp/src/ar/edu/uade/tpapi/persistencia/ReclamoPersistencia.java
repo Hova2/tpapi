@@ -482,4 +482,38 @@ public class ReclamoPersistencia extends AdministradorPersistencia{
 			}
 		}
 	}
+	
+	public int cantReclamosMes(int mes){
+		Connection con = null;
+		PreparedStatement sta = null;
+		int cantidad = 0;
+		try {
+			con = ConnectionDB.getInstance().getConnection();
+			sta = con.prepareStatement("select count(nroReclamo) from tpapi.dbo.Reclamo "
+					+ "where MONTH(fechaCierre)=? and estado=3");
+			sta.setInt(1, mes);
+			ResultSet rs = sta.executeQuery();
+			while(rs.next()){
+				cantidad = rs.getInt(1);
+			}
+		}
+		catch (Exception e){
+			System.out.println(e);
+		}
+		finally{
+			try{
+				if(sta!=null)
+					sta.close();
+			}
+			catch (SQLException e){}
+			try{
+				if(con!=null)
+					ConnectionDB.getInstance().realeaseConnection(con);
+			}
+			catch(Exception se){
+				se.printStackTrace();
+			}
+		}
+		return cantidad;
+	}
 }

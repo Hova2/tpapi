@@ -40,6 +40,10 @@ public abstract class Reclamo {
 		return ReclamoPersistencia.getInstance().rankingClientes();
 	}
 	
+	public static int cantReclamosMes(int mes){
+		return ReclamoPersistencia.getInstance().cantReclamosMes(mes);
+	}
+	
 	private long buscaNroUltimoReclamo(){
 		if (nroUltimoReclamo==-1){
 			nroUltimoReclamo=ReclamoPersistencia.getInstance().ultimoNumero();

@@ -364,5 +364,9 @@ public class Controlador {
 		}
 		return clientesViewTmp;
 	}
+	
+	public int cantReclamosMes(int mes){
+		return Reclamo.cantReclamosMes(mes);
+	}
 
 }

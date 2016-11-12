@@ -2,6 +2,7 @@ package ar.edu.uade.tpapi.vista;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JTextField;
 
 import javax.swing.WindowConstants;
 import javax.swing.SwingUtilities;
@@ -21,6 +22,7 @@ import javax.swing.SwingUtilities;
 */
 public class PantallaConsulta extends javax.swing.JFrame {
 	private JButton rankingClientes;
+	private JButton cantReclamosMes;
 
 	/**
 	* Auto-generated main method to display this JFrame
@@ -49,11 +51,23 @@ public class PantallaConsulta extends javax.swing.JFrame {
 				rankingClientes = new JButton();
 				getContentPane().add(rankingClientes);
 				rankingClientes.setText("Ranking de clientes");
-				rankingClientes.setBounds(207, 12, 166, 21);
+				rankingClientes.setBounds(150, 12, 293, 21);
 				rankingClientes.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent evt) {
 						PantallaRankingClientes pRC = new PantallaRankingClientes();
 						pRC.setVisible(true);
+					}
+				});
+			}
+			{
+				cantReclamosMes = new JButton();
+				getContentPane().add(cantReclamosMes);
+				cantReclamosMes.setText("Cantidad de reclamos por mes");
+				cantReclamosMes.setBounds(150, 54, 293, 21);
+				cantReclamosMes.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
+						PantallaReclamosMes pRM = new PantallaReclamosMes();
+						pRM.setVisible(true);
 					}
 				});
 			}
