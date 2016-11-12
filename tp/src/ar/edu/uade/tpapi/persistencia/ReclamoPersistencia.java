@@ -420,4 +420,11 @@ public class ReclamoPersistencia extends AdministradorPersistencia{
 		}
 		return accionesTmp;
 	}
+	
+	public Vector<Cliente> rankingClientes(){
+		Connection con = null;
+		PreparedStatement sta = null;
+		Vector<Cliente> clientesTmp = new Vector<Cliente>();
+		sta = con.prepareStatement("SELECT count(dniCliente) FROM tpapi.dbo.Reclamo GROUP BY dniCliente");
+	}
 }

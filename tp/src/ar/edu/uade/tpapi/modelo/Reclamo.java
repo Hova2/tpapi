@@ -36,6 +36,10 @@ public abstract class Reclamo {
 		return reclamosTmp;
 	}
 	
+	public static Vector<Cliente> rankingClientes(){
+		return null;
+	}
+	
 	private long buscaNroUltimoReclamo(){
 		if (nroUltimoReclamo==-1){
 			nroUltimoReclamo=ReclamoPersistencia.getInstance().ultimoNumero();

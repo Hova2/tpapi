@@ -354,13 +354,12 @@ public class Controlador {
 		return reclamoTmp;
 	}
 	
-	/*public Vector<Cliente> clientesMasActivos(){
-		Vector<Reclamo> reclamosTmp = Reclamo.recuperarReclamos();
-		Vector<Cliente> clientesActivos = new Vector<Cliente>();
-		for (int i=0;i<reclamosTmp.size();i++){
-			clientesActivos.add(reclamos.elementAt(i))
-		}
-	}*/
+	/*Metodos de Reportes*/
+	
+	public Vector<ClienteView> rankingClientes(){
+		
+		return null;
+	}
 	
 
 }
