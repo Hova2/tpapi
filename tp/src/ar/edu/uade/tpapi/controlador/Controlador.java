@@ -357,9 +357,12 @@ public class Controlador {
 	/*Metodos de Reportes*/
 	
 	public Vector<ClienteView> rankingClientes(){
-		
-		return null;
+		Vector<Cliente> clientesTmp = Reclamo.rankingClientes();
+		Vector<ClienteView> clientesViewTmp = new Vector<ClienteView>();
+		for(int i=0;i<clientesTmp.size();i++){
+			clientesViewTmp.add(clientesTmp.get(i).crearViewCliente());
+		}
+		return clientesViewTmp;
 	}
-	
 
 }

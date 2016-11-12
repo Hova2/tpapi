@@ -37,7 +37,7 @@ public abstract class Reclamo {
 	}
 	
 	public static Vector<Cliente> rankingClientes(){
-		return null;
+		return ReclamoPersistencia.getInstance().rankingClientes();
 	}
 	
 	private long buscaNroUltimoReclamo(){

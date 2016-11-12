@@ -425,6 +425,61 @@ public class ReclamoPersistencia extends AdministradorPersistencia{
 		Connection con = null;
 		PreparedStatement sta = null;
 		Vector<Cliente> clientesTmp = new Vector<Cliente>();
-		sta = con.prepareStatement("select top 5 dniCliente,count(dniCliente) AS cantidadReclamoCliente from tpapi.dbo.Reclamo group by dniCliente order by cantidadReclamoCliente DESC");
+		try {
+			con = ConnectionDB.getInstance().getConnection(); 
+			sta = con.prepareStatement("select top 5 dniCliente,count(dniCliente) AS cantidadReclamoCliente from tpapi.dbo.Reclamo group by "
+					+ "dniCliente order by cantidadReclamoCliente DESC");
+			ResultSet rs = sta.executeQuery();
+			while(rs.next()){
+				Cliente clienteTmp = ClientePersistencia.getInstance().recuperarCliente(rs.getLong(1));
+				clientesTmp.add(clienteTmp);
+			}
+		} catch (Exception e){
+			System.out.println(e);
+		}
+		finally{
+			try{
+				if(sta!=null)
+					sta.close();
+			}
+			catch (SQLException e){}
+			try{
+				if(con!=null)
+					ConnectionDB.getInstance().realeaseConnection(con);
+			}
+			catch(Exception se){
+				se.printStackTrace();
+			}
+		}
+		return clientesTmp;
+	}
+	
+	public void cerrarReclamo(long nroReclamo){
+		Connection con = null;
+		PreparedStatement sta = null;
+		try {
+			con = ConnectionDB.getInstance().getConnection();
+			sta = con.prepareStatement("update tpapi.dbo.Reclamo set fechaCierre=? where nroReclamo=? ");
+			Date fechaTmp = new Date();
+			sta.setDate(1,new java.sql.Date(fechaTmp.getTime()));
+			sta.setLong(2, nroReclamo);
+			sta.execute();
+		} catch (Exception e){
+			System.out.println(e);
+		}
+		finally{
+			try{
+				if(sta!=null)
+					sta.close();
+			}
+			catch (SQLException e){}
+			try{
+				if(con!=null)
+					ConnectionDB.getInstance().realeaseConnection(con);
+			}
+			catch(Exception se){
+				se.printStackTrace();
+			}
+		}
 	}
 }

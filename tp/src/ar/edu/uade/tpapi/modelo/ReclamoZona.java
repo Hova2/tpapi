@@ -57,6 +57,8 @@ public class ReclamoZona extends Reclamo {
 	public void setEstado(int estado) {
 		this.estado = estado;
 		ReclamoPersistencia.getInstance().cambiarEstado(estado, super.getNroReclamo());
+		if(estado==3)
+			ReclamoPersistencia.getInstance().cerrarReclamo(super.getNroReclamo());
 	}
 
 	public Date getFechaAlta() {
