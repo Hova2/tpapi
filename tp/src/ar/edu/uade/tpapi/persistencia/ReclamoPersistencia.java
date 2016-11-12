@@ -425,6 +425,6 @@ public class ReclamoPersistencia extends AdministradorPersistencia{
 		Connection con = null;
 		PreparedStatement sta = null;
 		Vector<Cliente> clientesTmp = new Vector<Cliente>();
-		sta = con.prepareStatement("SELECT count(dniCliente) FROM tpapi.dbo.Reclamo GROUP BY dniCliente");
+		sta = con.prepareStatement("select top 5 dniCliente,count(dniCliente) AS cantidadReclamoCliente from tpapi.dbo.Reclamo group by dniCliente order by cantidadReclamoCliente DESC");
 	}
 }
