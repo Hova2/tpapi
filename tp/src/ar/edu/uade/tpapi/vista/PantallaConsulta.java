@@ -22,6 +22,8 @@ import javax.swing.SwingUtilities;
 */
 public class PantallaConsulta extends javax.swing.JFrame {
 	private JButton rankingClientes;
+	private JButton tiempoPromedioRta;
+	private JButton rankingTratamientoReclamo;
 	private JButton cantReclamosMes;
 
 	/**
@@ -70,6 +72,18 @@ public class PantallaConsulta extends javax.swing.JFrame {
 						pRM.setVisible(true);
 					}
 				});
+			}
+			{
+				rankingTratamientoReclamo = new JButton();
+				getContentPane().add(rankingTratamientoReclamo);
+				rankingTratamientoReclamo.setText("Ranking de Tratamiento de Reclamos");
+				rankingTratamientoReclamo.setBounds(150, 94, 293, 23);
+			}
+			{
+				tiempoPromedioRta = new JButton();
+				getContentPane().add(tiempoPromedioRta);
+				tiempoPromedioRta.setText("Tiempo promedio de respuestas por responsable");
+				tiempoPromedioRta.setBounds(150, 135, 293, 23);
 			}
 			pack();
 			this.setSize(565, 367);
